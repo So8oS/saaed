@@ -128,7 +128,7 @@ const Services = () => {
             key={index}
             className="p-6 max-w-sm  bg-white rounded-xl shadow-md flex items-center space-x-4 hover:shadow-lg transition-shadow duration-300"
           >
-            <div className="flex-shrink-0 text-indigo-600">
+            <div className="flex-shrink-0 ">
               {sector.icon}
             </div>
             <div>

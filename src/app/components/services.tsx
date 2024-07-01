@@ -125,12 +125,16 @@ const sectors = [
 const Services = () => {
   return (
     <div className="pt-16 flex flex-col justify-center items-center ">
-      <h2 className="text-4xl lg:text-5xl font-bold mb-10 text-center">
+      <h2
+        className="text-4xl lg:text-5xl font-bold mb-10 text-center"
+        data-aos="fade-up"
+      >
         Our Services
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
         {services.map((service, index) => (
           <div
+            data-aos="fade-up"
             key={index}
             className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 
         hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
@@ -168,13 +172,17 @@ const Services = () => {
 
       <div className="max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8">
         {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-12">Sectors We Serve</h2> */}
-        <h2 className="text-4xl lg:text-5xl font-bold mb-10 text-center">
+        <h2
+          className="text-4xl lg:text-5xl font-bold mb-10 text-center"
+          data-aos="fade-up"
+        >
           Sectors We Serve
         </h2>
 
         <div className="grid gap-8 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 ">
           {sectors.map((sector, index) => (
             <div
+              data-aos="fade-left"
               key={index}
               className="p-6 max-w-sm  bg-white rounded-xl shadow-md flex items-center space-x-4 
               hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
@@ -192,7 +200,10 @@ const Services = () => {
         </div>
       </div>
 
-      <div className=" flex flex-col justify-center items-center text-center pt-16  ">
+      <div
+        className=" flex flex-col justify-center items-center text-center py-12 border w-full mt-5 rounded-xl bg-slate-50 "
+        data-aos="fade-up"
+      >
         <h1 className="text-5xl font-bold mb-4 ">Are you still confused?</h1>
         <p className="text-lg md:text-xl  leading-relaxed  md:px-14">
           Take your free test now!

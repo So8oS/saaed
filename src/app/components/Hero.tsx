@@ -26,7 +26,10 @@ const Hero = () => {
 
       <Link
         href="/book"
-        className="  bg-black  text-white text-lg font-semibold  px-8 py-2 rounded-full mt-8"
+        className="  bg-black  text-white text-lg font-semibold  px-8 py-2 rounded-full mt-8
+                  hover:bg-slate-300 hover:text-black transition duration-300 
+
+        "
       >
         Book Now
       </Link>

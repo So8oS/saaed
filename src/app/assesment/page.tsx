@@ -39,7 +39,7 @@ const AsForm = () => {
         {questions.map((question, index) => (
           <div key={index} className="space-y-4">
             <p className="text-lg">{`${index + 1}- ${question.text} `}</p>
-            <div className="flex justify-between items-center">
+            <div className="flex lg:justify-between justify-center items-center gap-2">
               {[
                 "Strongly Disagree",
                 "Disagree",
@@ -51,7 +51,7 @@ const AsForm = () => {
                   key={optionIndex}
                   className="inline-flex flex-col items-center space-y-2 cursor-pointer"
                 >
-                  <span className="text-xs text-gray-600">{option}</span>
+                  <span className=" text-gray-600 h-12">{option}</span>
                   <input
                     type="radio"
                     name={`question${index}`}

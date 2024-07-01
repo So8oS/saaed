@@ -4,6 +4,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Sidbar from "./sidbar";
+import Link from "next/link";
 // import Sidbar from './sidbar';
 
 const routes = [
@@ -36,12 +37,13 @@ const Navbar = () => {
 
       <ul className="md:flex justify-center items-center font-semibold gap-10 hidden ">
         {routes.map((route, index) => (
-          <li
+          <Link
+            href={`/${route.name.toLowerCase()}`}
             key={index}
             className="cursor-pointer hover:text-[#1f8598] hover:border-b-2 border-[#1f8598] transition duration-300 "
           >
             {route.name}
-          </li>
+          </Link>
         ))}
         {lang === "en" ? (
           <img

@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 
 const services = [
@@ -189,6 +190,24 @@ const Services = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className=" flex flex-col justify-center items-center text-center pt-16  ">
+        <h1 className="text-5xl font-bold mb-4 ">Are you still confused?</h1>
+        <p className="text-lg md:text-xl  leading-relaxed  md:px-14">
+          Take your free test now!
+        </p>
+
+        <Link
+          href="/assesment"
+          className="  bg-black  text-white text-lg font-semibold  px-8 py-2 rounded-full mt-8
+          hover:bg-slate-300 hover:text-black transition duration-300 
+          "
+        >
+          Go to test
+        </Link>
+
+        {/* <Popup /> */}
       </div>
     </div>
   );

@@ -12,15 +12,18 @@ import { CiMenuFries } from "react-icons/ci";
 import { IoHome } from "react-icons/io5";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { RiContactsFill } from "react-icons/ri";
+import Link from "next/link";
 
 const routes = [
   {
     name: "Home",
     icon: <IoHome className="w-8 h-8" />,
+    path: "/",
   },
   {
     name: "About",
     icon: <BsInfoCircleFill className="w-8 h-8" />,
+    path: "/about",
   },
 ];
 
@@ -33,13 +36,14 @@ const Sidbar = () => {
         <SheetTrigger>
           <CiMenuFries className="w-8 h-8 cursor-pointer" />
         </SheetTrigger>
-        <SheetContent className="flex  flex-col justify-between   gap-8 font-Lora bg-slate-200 border-r border-t border-l border-black  ">
+        <SheetContent className="flex  flex-col justify-between   gap-8 font-Lora  border-r border-t border-l border-black  ">
           <img src="./logo.png" alt="Logo" className="w-20 pt-8 self-center" />
           <div className="flex flex-col  text-2xl gap-8 border-y border-slate-900 py-5 ">
             {routes.map((route, index) => (
-              <div
-                className="flex  items-center gap-5 hover:bg-slate-500 hover:text-white p-2 rounded-md "
+              <Link
+                href={`/${route.path}`}
                 key={index}
+                className="flex  items-center gap-5  p-2 rounded-md "
               >
                 {route.icon}
                 <h1
@@ -48,13 +52,10 @@ const Sidbar = () => {
                 >
                   {route.name}
                 </h1>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="flex flex-col justify-center items-center gap-5">
-            <button className="bg-black text-white px-4 py-3 rounded-full hover:bg-slate-300 hover:text-black transition duration-300 text-2xl">
-              Contact us
-            </button>
             {lang === "en" ? (
               <img
                 src="./ar.png"

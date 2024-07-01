@@ -11,7 +11,6 @@ import {
 import { CiMenuFries } from "react-icons/ci";
 import { IoHome } from "react-icons/io5";
 import { BsInfoCircleFill } from "react-icons/bs";
-import { RiContactsFill } from "react-icons/ri";
 import Link from "next/link";
 
 const routes = [
@@ -29,29 +28,32 @@ const routes = [
 
 const Sidbar = () => {
   const [lang, setLang] = useState("en");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSheet = () => setIsOpen(!isOpen);
+  const closeSheet = () => setIsOpen(false);
 
   return (
     <div>
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={toggleSheet}>
         <SheetTrigger>
-          <CiMenuFries className="w-8 h-8 cursor-pointer" />
+          <CiMenuFries
+            className="w-8 h-8 cursor-pointer"
+            onClick={toggleSheet}
+          />
         </SheetTrigger>
-        <SheetContent className="flex  flex-col justify-between   gap-8 font-Lora  border-r border-t border-l border-black  ">
+        <SheetContent className="flex flex-col justify-between gap-8 font-Lora border-r border-t border-l border-black">
           <img src="./logo.png" alt="Logo" className="w-20 pt-8 self-center" />
-          <div className="flex flex-col  text-2xl gap-8 border-y border-slate-900 py-5 ">
+          <div className="flex flex-col text-2xl gap-8 border-y border-slate-900 py-5">
             {routes.map((route, index) => (
               <Link
-                href={`/${route.path}`}
+                href={`${route.path}`}
                 key={index}
-                className="flex  items-center gap-5  p-2 rounded-md "
+                className="flex items-center gap-5 p-2 rounded-md"
+                onClick={closeSheet}
               >
                 {route.icon}
-                <h1
-                  className="self start cursor-pointer
-            "
-                >
-                  {route.name}
-                </h1>
+                <h1 className="self-start cursor-pointer">{route.name}</h1>
               </Link>
             ))}
           </div>

@@ -1,8 +1,4 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body{
-    background-color: #FAF9F6	;
-    font-family: 'Dubai', sans-serif;
-}
+  @tailwind components;
+  @tailwind utilities;
+  

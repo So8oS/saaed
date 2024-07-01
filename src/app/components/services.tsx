@@ -1,8 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
-import { AiFillSafetyCertificate } from 'react-icons/ai';
-import { FaCheckCircle } from 'react-icons/fa';
+
 
 
 const services = [
@@ -87,7 +86,7 @@ const sectors = [
 
 const Services = () => {
   return (
-    <div className='py-16 flex flex-col justify-center items-center '>
+    <div className='pt-16 flex flex-col justify-center items-center '>
     <h2 className="text-4xl lg:text-5xl font-bold mb-10 text-center">Our Services</h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
       {services.map((service, index) => (
@@ -100,7 +99,7 @@ const Services = () => {
         </div>
       ))}
     </div>
-   <div className="flex  gap-7 md:gap-20 py-16 md:py-36 ">
+   <div className="flex flex-col lg:flex-row  gap-7 md:gap-20 py-16 md:py-36 ">
       {nums.map((num, index) => (
         <div
           key={index}
@@ -118,7 +117,7 @@ const Services = () => {
       ))}
     </div>
 
-    <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8">
       {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-12">Sectors We Serve</h2> */}
       <h2 className="text-4xl lg:text-5xl font-bold mb-10 text-center">Sectors We Serve</h2>
 

@@ -1,5 +1,6 @@
-'use client';
+"use client";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const industries = [
   { name: "Sector 1", value: "sector1" },
@@ -23,226 +24,234 @@ const cities = [
   { name: "City 5", value: "city5" },
 ];
 
+const coachingTypes = [
+  "Relationship coaching",
+  "Life coaching",
+  "Business coaching",
+  "Career coaching",
+  "Child coaching",
+];
+
+interface FormValues {
+  name: string;
+  email: string;
+  telephone: string;
+  coachingType: string;
+  preferredDate: string;
+  message: string;
+  companyName: string;
+  responsibleName: string;
+  industry: string;
+  city: string;
+  website: string;
+  phone: string;
+  question1: string;
+  question2: string;
+  question3: string;
+}
+
 const Form = () => {
   const [activeTab, setActiveTab] = useState("individual");
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data: FormValues) => {
+    console.log(data);
+    reset();
+  };
 
   return (
-    <div className="border border-gray-100 space-y-4 max-w-screen-xl bg-white p-6 lg:p-10 shadow-2xl rounded-lg border-t-8 border-r-8 border-t-[#1f8598] border-r-[#ed8972]">
+    <div className="overflow-scroll border flex flex-col justify-center items-center border-gray-100 space-y-4 max-w-screen-xl bg-white p-6 m-3 lg:p-10 shadow-2xl rounded-lg border-t-8 border-r-8 border-t-[#1f8598] border-r-[#ed8972]">
       <h1 className="mb-6 text-xl font-semibold lg:text-2xl self-center">
-        Form
+        Booking Form
       </h1>
-      <div className="mb-4">
-        <button
-          className={`mr-4 ${activeTab === "individual" ? "font-bold" : ""}`}
-          onClick={() => setActiveTab("individual")}
+      <div className="shadow rounded-full h-10 mt-4 flex relative items-center w-64 self-center">
+        <div className="w-full flex justify-center">
+          <button onClick={() => setActiveTab("individual")}>Individual</button>
+        </div>
+        <div className="w-full flex justify-center">
+          <button onClick={() => setActiveTab("business")}>Business</button>
+        </div>
+        <span
+          className={`elSwitch bg-indigo-600 shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute ${
+            activeTab === "individual" ? "left-1" : "left-[calc(50%+4px)]"
+          }`}
         >
-          Individual
-        </button>
-        <button
-          className={`${activeTab === "business" ? "font-bold" : ""}`}
-          onClick={() => setActiveTab("business")}
-        >
-          Business
-        </button>
+          {activeTab === "individual" ? "Individual" : "Business"}
+        </span>
       </div>
-      {activeTab === "individual" ? (
-        <form>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <label>Name:</label>
+      {/* @ts-ignore */}
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl m-auto">
+        {activeTab === "individual" ? (
+          <>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <label>Name:</label>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  {...register("name")}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                />
+              </div>
+              <div>
+                <label>Email:</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  {...register("email")}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                />
+              </div>
+            </div>
+            <div className="pt-4">
+              <label>Telephone:</label>
               <input
-                type="text"
-                placeholder="Name"
+                type="tel"
+                placeholder="Telephone"
+                {...register("telephone")}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
               />
             </div>
-            <div>
-              <label>Email:</label>
+            <div className="grid gap-4 md:grid-cols-2 pt-4">
+              <div>
+                <label>Coaching Type:</label>
+                <select
+                  {...register("coachingType")}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
+                >
+                  {coachingTypes.map((type, index) => (
+                    <option key={index} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label>Preferred Date:</label>
+                <input
+                  type="date"
+                  {...register("preferredDate")}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
+                />
+              </div>
+            </div>
+            <div className="py-4">
+              <label>Message:</label>
+              <textarea
+                rows={4}
+                {...register("message")}
+                className="mt-2 w-full rounded-md bg-gray-100 p-1"
+              ></textarea>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <label>Company Name:</label>
+                <input
+                  type="text"
+                  placeholder="Company L.L.C"
+                  {...register("companyName")}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                />
+              </div>
+              <div>
+                <label>Name:</label>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  {...register("responsibleName")}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                />
+              </div>
+            </div>
+            <div className="pt-4">
+              <label>Industry:</label>
+              <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
+                <select
+                  {...register("industry")}
+                  className="peer flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
+                >
+                  {industries.map((industry, index) => (
+                    <option key={index} value={industry.value}>
+                      {industry.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="pt-4">
+              <label>City:</label>
+              <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
+                <select
+                  {...register("city")}
+                  className="peer flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
+                >
+                  {cities.map((city, index) => (
+                    <option key={index} value={city.value}>
+                      {city.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="pt-4">
+              <label>Website:</label>
+              <input
+                type="text"
+                placeholder="https://example.com"
+                {...register("website")}
+                className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+              />
+            </div>
+            <div className="pt-4">
+              <label>Email Address:</label>
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Info@example.com"
+                {...register("email")}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
               />
             </div>
-          </div>
-          <div className="pt-4">
-            <label>Telephone:</label>
-            <input
-              type="tel"
-              placeholder="Telephone"
-              className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-            />
-          </div>
-          <div className="py-4">
-            <label>Message:</label>
-            <textarea
-              rows={4}
-              className="mt-2 w-full rounded-md bg-gray-100 p-1"
-            ></textarea>
-          </div>
-          <div>
-            <button
-              type="button"
-              className="mt-5 w-full rounded-md bg-blue-600 p-2 text-center font-semibold text-white"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      ) : (
-        <form>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <label>Company Name:</label>
-              <input
-                type="text"
-                placeholder="Company L.L.C"
-                className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-              />
-            </div>
-            <div>
-              <label>Company Responsible:</label>
-              <input
-                type="text"
-                placeholder="Name"
-                className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-              />
-            </div>
-          </div>
-          <div className="pt-4">
-            <label>Industry:</label>
-            <div className="relative w-56 mt-2 bg-gray-100 rounded-lg">
-              <input
-                className="peer hidden"
-                type="checkbox"
-                name="select-1"
-                id="select-1"
-              />
-              <label
-                htmlFor="select-1"
-                className="flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
-              >
-                Select Option
-              </label>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="pointer-events-none absolute right-5 top-3 h-4 text-gray-600 transition peer-checked:rotate-180"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
+            <div className="grid gap-4 lg:grid-cols-2 pt-4">
+              <div>
+                <label>Phone: </label>
+                <input
+                  type="text"
+                  placeholder="+543 5445 0543"
+                  {...register("phone")}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                  required
                 />
-              </svg>
-              <ul className="max-h-0 select-none flex-col overflow-hidden rounded-b-lg shadow-md transition-all duration-300 peer-checked:max-h-56 peer-checked:py-3">
-                {industries.map((industry, index) => (
-                  <li
-                    key={index}
-                    className="cursor-pointer hover:bg-gray-200 p-2 px-3"
-                  >
-                    {industry.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="pt-4">
-            <label>City:</label>
-            <div className="relative w-56 mt-2 bg-gray-100 rounded-lg">
-              <input
-                className="peer hidden"
-                type="checkbox"
-                name="select-1"
-                id="select-1"
-              />
-              <label
-                htmlFor="select-2"
-                className="flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
-              >
-                Select Option
-              </label>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="pointer-events-none absolute right-5 top-3 h-4 text-gray-600 transition peer-checked:rotate-180"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-              <ul className="max-h-0 select-none flex-col overflow-hidden rounded-b-lg shadow-md transition-all duration-300 peer-checked:max-h-56 peer-checked:py-3">
-                {cities.map((city, index) => (
-                  <li
-                    key={index}
-                    className="cursor-pointer hover:bg-gray-200 p-2 px-3"
-                  >
-                    {city.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="pt-4">
-            <label>Website:</label>
-            <input
-              type="text"
-              placeholder="https://example.com"
-              className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-            />
-          </div>
-          <div className="pt-4">
-            <label>Email Address:</label>
-            <input
-              type="email"
-              placeholder="Info@example.com"
-              className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-            />
-          </div>
-          <div className="grid gap-4 lg:grid-cols-2 pt-4">
-            <div>
-              <label>
-                Phone: <span className="text-sm text-gray-400">(optional)</span>
-              </label>
-              <input
-                type="text"
-                placeholder="+543 5445 0543"
-                className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-              />
-            </div>
-          </div>
-          <div className="my-16">
-            <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700" />
-          </div>
-          <div className="flex flex-col gap-8">
-            {questions.map((question, index) => (
-              <div key={index}>
-                <label className="">{`${index + 1}- ${question}`}</label>
-                <textarea
-                  rows={4}
-                  className="mt-2 w-full rounded-md bg-gray-100 p-1"
-                ></textarea>
               </div>
-            ))}
-          </div>
-          <div>
-            <button
-              type="button"
-              className="mt-5 w-full rounded-md bg-blue-600 p-2 text-center font-semibold text-white"
-            >
-              Get Started
-            </button>
-          </div>
-        </form>
-      )}
+            </div>
+            <div className="my-16">
+              <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700" />
+            </div>
+            <div className="flex flex-col gap-8">
+              {questions.map((question, index) => (
+                <div key={index}>
+                  <label className="">{`${index + 1}- ${question}`}</label>
+                  <textarea
+                    rows={4}
+                    {...register(`question${index + 1}`)}
+                    className="mt-2 w-full rounded-md bg-gray-100 p-1"
+                  ></textarea>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+        <div>
+          <button
+            type="submit"
+            className="mt-5 w-full rounded-md bg-[#1f8598] p-2 text-center font-semibold text-white"
+          >
+            {activeTab === "individual" ? "Submit" : "Get Started"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

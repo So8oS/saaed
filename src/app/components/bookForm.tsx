@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import emailjs from "emailjs-com";
 
 const industries = [
   { name: "Sector 1", value: "sector1" },
@@ -33,6 +34,7 @@ const coachingTypes = [
 ];
 
 interface FormValues {
+  clientType: string;
   name: string;
   email: string;
   telephone: string;
@@ -55,8 +57,49 @@ const Form = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data: FormValues) => {
-    console.log(data);
-    reset();
+    const templateParams = {
+      to_name: "Saaed",
+      from_name: data.name,
+      email: data.email,
+      telephone: data.telephone,
+      coachingType: data.coachingType,
+      preferredDate: data.preferredDate,
+      message: data.message,
+      clientType: activeTab,
+    };
+
+    if (activeTab === "business") {
+      Object.assign(templateParams, {
+        companyName: data.companyName,
+        responsibleName: data.responsibleName,
+        industry: data.industry,
+        city: data.city,
+        website: data.website,
+        phone: data.phone,
+        question1: data.question1,
+        question2: data.question2,
+        question3: data.question3,
+      });
+    }
+
+    emailjs
+      .send(
+        "sa3ed",
+        process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE ?? "",
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAIL_JS
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert("Form submitted successfully!");
+          reset();
+        },
+        (error) => {
+          console.log(error.text);
+          alert("There was an error submitting the form. Please try again.");
+        }
+      );
   };
 
   return (
@@ -72,7 +115,7 @@ const Form = () => {
           <button onClick={() => setActiveTab("business")}>Business</button>
         </div>
         <span
-          className={`elSwitch bg-indigo-600 shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute ${
+          className={`elSwitch bg-[#1f8598] shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute ${
             activeTab === "individual" ? "left-1" : "left-[calc(50%+4px)]"
           }`}
         >
@@ -83,6 +126,11 @@ const Form = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl m-auto">
         {activeTab === "individual" ? (
           <>
+            <input
+              type="hidden"
+              value="individual"
+              {...register("clientType")}
+            />
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label>Name:</label>
@@ -146,6 +194,7 @@ const Form = () => {
           </>
         ) : (
           <>
+            <input type="hidden" value="business" {...register("clientType")} />
             <div className="grid gap-4 md:grid-cols-2">
               <div>
                 <label>Company Name:</label>

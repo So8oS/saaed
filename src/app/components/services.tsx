@@ -124,14 +124,14 @@ const sectors = [
 
 const Services = () => {
   return (
-    <div className="pt-16 flex flex-col justify-center items-center ">
+    <div className="pt-16 flex flex-col justify-center items-center  ">
       <h2
         className="text-4xl lg:text-5xl font-bold mb-10 text-center"
         data-aos="fade-up"
       >
         Our Services
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
         {services.map((service, index) => (
           <div
             data-aos="fade-up"
@@ -179,13 +179,13 @@ const Services = () => {
           Sectors We Serve
         </h2>
 
-        <div className="grid gap-8 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 ">
+        <div className="grid gap-8 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 overflow-x-hidden p-1">
           {sectors.map((sector, index) => (
             <div
               data-aos="fade-left"
               key={index}
               className="p-6 max-w-sm  bg-white rounded-xl shadow-md flex items-center space-x-4 
-              hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
+              hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 overflow-x-hidden
               "
             >
               <div className="flex-shrink-0 ">{sector.icon}</div>

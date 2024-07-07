@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import Aos from "./components/aos";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "SAAED",
@@ -33,6 +35,18 @@ export default function RootLayout({
           {children}
         </div>
         <Footer />
+        <ToastContainer
+          position="top-center"
+          autoClose={10000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </body>
       <script>AOS.init();</script>
     </html>

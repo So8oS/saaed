@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
+import { toast } from "react-toastify";
 
 const industries = [
   { name: "Sector 1", value: "sector1" },
@@ -54,9 +55,16 @@ interface FormValues {
 
 const Form = () => {
   const [activeTab, setActiveTab] = useState("individual");
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = (data: FormValues) => {
+    setIsSubmitting(true);
     const templateParams = {
       to_name: "Saaed",
       from_name: data.name,
@@ -92,12 +100,16 @@ const Form = () => {
       .then(
         (result) => {
           console.log(result.text);
-          alert("Form submitted successfully!");
+          toast.success(
+            "Form submitted successfully 🎉\n Saeed team will contact you soon!"
+          );
           reset();
+          setIsSubmitting(false);
         },
         (error) => {
           console.log(error.text);
-          alert("There was an error submitting the form. Please try again.");
+          toast.error("Failed to submit the form, please try again later");
+          setIsSubmitting(false);
         }
       );
   };
@@ -137,18 +149,34 @@ const Form = () => {
                 <input
                   type="text"
                   placeholder="Name"
-                  {...register("name")}
+                  {...register("name", { required: "Name is required" })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">
+                    {errors.name.message?.toString()}
+                  </p>
+                )}
               </div>
               <div>
                 <label>Email:</label>
                 <input
                   type="email"
                   placeholder="Email"
-                  {...register("email")}
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: "Entered value does not match email format",
+                    },
+                  })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">
+                    {errors.email.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
             <div className="pt-4">
@@ -156,15 +184,24 @@ const Form = () => {
               <input
                 type="tel"
                 placeholder="Telephone"
-                {...register("telephone")}
+                {...register("telephone", {
+                  required: "Telephone is required",
+                })}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
               />
+              {errors.telephone && (
+                <p className="text-red-500 text-sm">
+                  {errors.telephone.message?.toString()}
+                </p>
+              )}
             </div>
             <div className="grid gap-4 md:grid-cols-2 pt-4">
               <div>
                 <label>Coaching Type:</label>
                 <select
-                  {...register("coachingType")}
+                  {...register("coachingType", {
+                    required: "Coaching type is required",
+                  })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
                 >
                   {coachingTypes.map((type, index) => (
@@ -173,23 +210,40 @@ const Form = () => {
                     </option>
                   ))}
                 </select>
+                {errors.coachingType && (
+                  <p className="text-red-500 text-sm">
+                    {errors.coachingType.message?.toString()}
+                  </p>
+                )}
               </div>
               <div>
                 <label>Preferred Date:</label>
                 <input
                   type="date"
-                  {...register("preferredDate")}
+                  {...register("preferredDate", {
+                    required: "Preferred date is required",
+                  })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
                 />
+                {errors.preferredDate && (
+                  <p className="text-red-500 text-sm">
+                    {errors.preferredDate.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
             <div className="py-4">
               <label>Message:</label>
               <textarea
                 rows={4}
-                {...register("message")}
+                {...register("message", { required: "Message is required" })}
                 className="mt-2 w-full rounded-md bg-gray-100 p-1"
               ></textarea>
+              {errors.message && (
+                <p className="text-red-500 text-sm">
+                  {errors.message.message?.toString()}
+                </p>
+              )}
             </div>
           </>
         ) : (
@@ -201,25 +255,41 @@ const Form = () => {
                 <input
                   type="text"
                   placeholder="Company L.L.C"
-                  {...register("companyName")}
+                  {...register("companyName", {
+                    required: "Company name is required",
+                  })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                 />
+                {errors.companyName && (
+                  <p className="text-red-500 text-sm">
+                    {errors.companyName.message?.toString()}
+                  </p>
+                )}
               </div>
               <div>
                 <label>Name:</label>
                 <input
                   type="text"
                   placeholder="Name"
-                  {...register("responsibleName")}
+                  {...register("responsibleName", {
+                    required: "Name is required",
+                  })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                 />
+                {errors.responsibleName && (
+                  <p className="text-red-500 text-sm">
+                    {errors.responsibleName.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
             <div className="pt-4">
               <label>Industry:</label>
               <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
                 <select
-                  {...register("industry")}
+                  {...register("industry", {
+                    required: "Industry is required",
+                  })}
                   className="peer flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
                 >
                   {industries.map((industry, index) => (
@@ -228,13 +298,18 @@ const Form = () => {
                     </option>
                   ))}
                 </select>
+                {errors.industry && (
+                  <p className="text-red-500 text-sm">
+                    {errors.industry.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
             <div className="pt-4">
               <label>City:</label>
               <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
                 <select
-                  {...register("city")}
+                  {...register("city", { required: "City is required" })}
                   className="peer flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
                 >
                   {cities.map((city, index) => (
@@ -243,6 +318,11 @@ const Form = () => {
                     </option>
                   ))}
                 </select>
+                {errors.city && (
+                  <p className="text-red-500 text-sm">
+                    {errors.city.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
             <div className="pt-4">
@@ -250,18 +330,34 @@ const Form = () => {
               <input
                 type="text"
                 placeholder="https://example.com"
-                {...register("website")}
+                {...register("website", { required: "Website is required" })}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
               />
+              {errors.website && (
+                <p className="text-red-500 text-sm">
+                  {errors.website.message?.toString()}
+                </p>
+              )}
             </div>
             <div className="pt-4">
               <label>Email Address:</label>
               <input
                 type="email"
                 placeholder="Info@example.com"
-                {...register("email")}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^\S+@\S+$/i,
+                    message: "Entered value does not match email format",
+                  },
+                })}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm">
+                  {errors.email.message?.toString()}
+                </p>
+              )}
             </div>
             <div className="grid gap-4 lg:grid-cols-2 pt-4">
               <div>
@@ -269,10 +365,14 @@ const Form = () => {
                 <input
                   type="text"
                   placeholder="+543 5445 0543"
-                  {...register("phone")}
+                  {...register("phone", { required: "Phone is required" })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-                  required
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">
+                    {errors.phone.message?.toString()}
+                  </p>
+                )}
               </div>
             </div>
             <div className="my-16">
@@ -284,9 +384,16 @@ const Form = () => {
                   <label className="">{`${index + 1}- ${question}`}</label>
                   <textarea
                     rows={4}
-                    {...register(`question${index + 1}`)}
+                    {...register(`question${index + 1}`, {
+                      required: `Answer to question ${index + 1} is required`,
+                    })}
                     className="mt-2 w-full rounded-md bg-gray-100 p-1"
                   ></textarea>
+                  {errors[`question${index + 1}`] && (
+                    <p className="text-red-500 text-sm">
+                      {errors[`question${index + 1}`]?.message?.toString()}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -295,9 +402,31 @@ const Form = () => {
         <div>
           <button
             type="submit"
-            className="mt-5 w-full rounded-md bg-[#1f8598] p-2 text-center font-semibold text-white"
+            className={`mt-5 w-full rounded-md bg-[#1f8598] p-2 text-center font-semibold text-white cursor-pointer  disabled:opacity-65 disabled:cursor-not-allowed `}
+            disabled={isSubmitting}
           >
-            {activeTab === "individual" ? "Submit" : "Get Started"}
+            {isSubmitting ? (
+              <svg
+                aria-hidden="true"
+                className="inline w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill"
+                />
+              </svg>
+            ) : activeTab === "individual" ? (
+              "Submit"
+            ) : (
+              "Get Started"
+            )}
           </button>
         </div>
       </form>

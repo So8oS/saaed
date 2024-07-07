@@ -83,6 +83,7 @@ import {
   FaHandsHelping,
   FaFemale,
 } from "react-icons/fa";
+import { Slider } from "./slider";
 
 const sectors = [
   {
@@ -200,6 +201,7 @@ const Services = () => {
         </div>
       </div>
 
+      <Slider />
       <div
         className=" flex flex-col justify-center items-center text-center py-12 border w-full mt-5 rounded-xl bg-slate-50 "
         data-aos="fade-up"

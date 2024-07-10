@@ -4,56 +4,59 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-const individualServices = [
-  {
-    service: "Mental & Professional Health",
-    description:
-      "Workshops focused on mental health awareness and stress management.",
-    icon: "graduation-cap.png",
-  },
-  {
-    service: "Relationship Coaching",
-    description:
-      "Strengthening interpersonal relationships and communication skills.",
-    icon: "team.png",
-  },
-  {
-    service: "Professional Coaching",
-    description: "Career development and performance enhancement support.",
-    icon: "suitcase.png",
-  },
-  {
-    service: "Personal Coaching",
-    description:
-      "Guidance for achieving personal growth, balance, and fulfillment.",
-    icon: "person.png",
-  },
-];
-
-const businessServices = [
-  {
-    service: "Team Development Programs",
-    description:
-      "Tailored programs for team development and improving work culture.",
-    icon: "puzzle-piece.png",
-  },
-  {
-    service: "Communication Coaching",
-    description:
-      "Training to enhance clarity and effectiveness in communication.",
-    icon: "speak.png",
-  },
-  {
-    service: "Executive Coaching",
-    description: "Leadership development and strategic support for executives.",
-    icon: "podium.png",
-  },
-  {
-    service: "Emotional Intelligence Tests",
-    description: "Comprehensive evaluations to improve emotional intelligence.",
-    icon: "mental-health.png",
-  },
-];
+const services = {
+  individual: [
+    {
+      service: "Mental & Professional Health",
+      description:
+        "Workshops focused on mental health awareness and stress management.",
+      icon: "graduation-cap.png",
+    },
+    {
+      service: "Relationship Coaching",
+      description:
+        "Strengthening interpersonal relationships and communication skills.",
+      icon: "team.png",
+    },
+    {
+      service: "Professional Coaching",
+      description: "Career development and performance enhancement support.",
+      icon: "suitcase.png",
+    },
+    {
+      service: "Personal Coaching",
+      description:
+        "Guidance for achieving personal growth, balance, and fulfillment.",
+      icon: "person.png",
+    },
+  ],
+  business: [
+    {
+      service: "Team Development Programs",
+      description:
+        "Tailored programs for team development and improving work culture.",
+      icon: "puzzle-piece.png",
+    },
+    {
+      service: "Communication Coaching",
+      description:
+        "Training to enhance clarity and effectiveness in communication.",
+      icon: "speak.png",
+    },
+    {
+      service: "Executive Coaching",
+      description:
+        "Leadership development and strategic support for executives.",
+      icon: "podium.png",
+    },
+    {
+      service: "Emotional Intelligence Tests",
+      description:
+        "Comprehensive evaluations to improve emotional intelligence.",
+      icon: "mental-health.png",
+    },
+  ],
+};
 
 const nums = [
   {
@@ -153,50 +156,26 @@ const Services = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
-        {activeTab === "individual"
-          ? individualServices.map((service, index) => (
-              <div
-                data-aos="fade-up"
-                key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 
-                hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
-                "
-              >
-                <img
-                  src={`${service.icon}`}
-                  alt={service.service}
-                  className="w-16 h-16 mb-4 "
-                />
-                <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
-                  {service.service}
-                </h3>
-                <p className="text-center text-gray-600">
-                  {service.description}
-                </p>
-              </div>
-            ))
-          : businessServices.map((service, index) => (
-              <div
-                data-aos="fade-up"
-                key={index}
-                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 
-                hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
-                "
-              >
-                <img
-                  src={`${service.icon}`}
-                  alt={service.service}
-                  className="w-16 h-16 mb-4 "
-                />
-                <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
-                  {service.service}
-                </h3>
-                <p className="text-center text-gray-600">
-                  {service.description}
-                </p>
-              </div>
-            ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {/* @ts-ignore */}
+        {services[activeTab].map((service, index) => (
+          <div
+            data-aos="fade-up"
+            key={index}
+            className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6
+            hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-125"
+          >
+            <img
+              src={`${service.icon}`}
+              alt={service.service}
+              className="w-16 h-16 mb-4"
+            />
+            <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
+              {service.service}
+            </h3>
+            <p className="text-center text-gray-600">{service.description}</p>
+          </div>
+        ))}
       </div>
 
       <div className="flex flex-col lg:flex-row  gap-7 md:gap-20 py-16 md:py-36 ">

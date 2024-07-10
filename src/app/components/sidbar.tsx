@@ -20,9 +20,9 @@ const routes = [
     path: "/",
   },
   {
-    name: "About",
+    name: "Contact Us",
     icon: <BsInfoCircleFill className="w-8 h-8" />,
-    path: "/about",
+    path: "/contact",
   },
 ];
 

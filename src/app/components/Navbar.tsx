@@ -8,11 +8,13 @@ import Link from "next/link";
 // import Sidbar from './sidbar';
 
 const routes = [
-  // {
-  //   name: 'Home',
-  // },
   {
-    name: "About",
+    name: "Home",
+    path: "",
+  },
+  {
+    name: "Contact Us",
+    path: "contact",
   },
 ];
 
@@ -38,7 +40,7 @@ const Navbar = () => {
       <ul className="md:flex justify-center items-center font-semibold gap-10 hidden ">
         {routes.map((route, index) => (
           <Link
-            href={`/${route.name.toLowerCase()}`}
+            href={`/${route.path}`}
             key={index}
             className="cursor-pointer hover:text-[#1f8598] hover:border-b-2 border-[#1f8598] transition duration-300 "
           >

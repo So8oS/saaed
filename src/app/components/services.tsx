@@ -1,36 +1,15 @@
+"use client";
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
-const services = [
-  {
-    service: "Team Development Programs",
-    description:
-      "Tailored programs for team development and improving work culture.",
-    icon: "puzzle-piece.png",
-  },
+const individualServices = [
   {
     service: "Mental & Professional Health",
     description:
       "Workshops focused on mental health awareness and stress management.",
     icon: "graduation-cap.png",
-  },
-  {
-    service: "Communication Coaching",
-    description:
-      "Training to enhance clarity and effectiveness in communication.",
-    icon: "speak.png",
-  },
-  {
-    service: "Executive Coaching",
-    description: "Leadership development and strategic support for executives.",
-    icon: "podium.png",
-  },
-  {
-    service: "Emotional Intelligence Tests",
-    description: "Comprehensive evaluations to improve emotional intelligence.",
-    icon: "mental-health.png",
   },
   {
     service: "Relationship Coaching",
@@ -51,6 +30,31 @@ const services = [
   },
 ];
 
+const businessServices = [
+  {
+    service: "Team Development Programs",
+    description:
+      "Tailored programs for team development and improving work culture.",
+    icon: "puzzle-piece.png",
+  },
+  {
+    service: "Communication Coaching",
+    description:
+      "Training to enhance clarity and effectiveness in communication.",
+    icon: "speak.png",
+  },
+  {
+    service: "Executive Coaching",
+    description: "Leadership development and strategic support for executives.",
+    icon: "podium.png",
+  },
+  {
+    service: "Emotional Intelligence Tests",
+    description: "Comprehensive evaluations to improve emotional intelligence.",
+    icon: "mental-health.png",
+  },
+];
+
 const nums = [
   {
     icon: "certified.png",
@@ -67,11 +71,6 @@ const nums = [
     title: "Effective",
     text: "Our coaching programs are designed to help you achieve your goals and improve your performance.",
   },
-  // {
-  //     icon: 'sales.png',
-  //   title: "Professional",
-  //   text: "We provide professional coaching services for individuals and organizations.",
-  // },
 ];
 
 import {
@@ -124,6 +123,8 @@ const sectors = [
 ];
 
 const Services = () => {
+  const [activeTab, setActiveTab] = useState("business");
+
   return (
     <div className="pt-16 flex flex-col justify-center items-center  ">
       <h2
@@ -132,27 +133,72 @@ const Services = () => {
       >
         Our Services
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
-        {services.map((service, index) => (
-          <div
-            data-aos="fade-up"
-            key={index}
-            className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 
-        hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
-        "
-          >
-            <img
-              src={`${service.icon}`}
-              alt={service.service}
-              className="w-16 h-16 mb-4 "
-            />
-            <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
-              {service.service}
-            </h3>
-            <p className="text-center text-gray-600">{service.description}</p>
-          </div>
-        ))}
+
+      <div className="flex justify-center mb-10 gap-3" data-aos="fade-up">
+        <button
+          className={`px-4 py-2  ${
+            activeTab === "business" ? "bg-black  text-white" : "bg-gray-200"
+          } rounded-3xl`}
+          onClick={() => setActiveTab("business")}
+        >
+          Business
+        </button>
+        <button
+          className={`px-4 py-2  ${
+            activeTab === "individual" ? "bg-black  text-white" : "bg-gray-200"
+          } rounded-3xl`}
+          onClick={() => setActiveTab("individual")}
+        >
+          Individual
+        </button>
       </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
+        {activeTab === "individual"
+          ? individualServices.map((service, index) => (
+              <div
+                data-aos="fade-up"
+                key={index}
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 
+                hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
+                "
+              >
+                <img
+                  src={`${service.icon}`}
+                  alt={service.service}
+                  className="w-16 h-16 mb-4 "
+                />
+                <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
+                  {service.service}
+                </h3>
+                <p className="text-center text-gray-600">
+                  {service.description}
+                </p>
+              </div>
+            ))
+          : businessServices.map((service, index) => (
+              <div
+                data-aos="fade-up"
+                key={index}
+                className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 
+                hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
+                "
+              >
+                <img
+                  src={`${service.icon}`}
+                  alt={service.service}
+                  className="w-16 h-16 mb-4 "
+                />
+                <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
+                  {service.service}
+                </h3>
+                <p className="text-center text-gray-600">
+                  {service.description}
+                </p>
+              </div>
+            ))}
+      </div>
+
       <div className="flex flex-col lg:flex-row  gap-7 md:gap-20 py-16 md:py-36 ">
         {nums.map((num, index) => (
           <div
@@ -172,7 +218,6 @@ const Services = () => {
       </div>
 
       <div className="max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8">
-        {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-12">Sectors We Serve</h2> */}
         <h2
           className="text-4xl lg:text-5xl font-bold mb-10 text-center"
           data-aos="fade-up"
@@ -194,7 +239,6 @@ const Services = () => {
                 <div className="text-xl font-medium text-black">
                   {sector.title}
                 </div>
-                {/* <p className="text-gray-500">{sector.description}</p> */}
               </div>
             </div>
           ))}
@@ -219,8 +263,6 @@ const Services = () => {
         >
           Go to test
         </Link>
-
-        {/* <Popup /> */}
       </div>
     </div>
   );

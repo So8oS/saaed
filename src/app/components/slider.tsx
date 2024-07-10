@@ -51,12 +51,12 @@ export const Slider = () => {
           onMouseDown={handleInteractionStart}
           onTouchStart={handleInteractionStart}
         >
-          <div className="py-10  border border-white flex justify-center items-center gap-2 ">
+          <div className="py-5  border border-white flex justify-center items-center  ">
             <p className=" text-black text-2xl font-semibold ">{getTitle()}</p>
             <img
-              src="./logo.png"
+              src="./logofull.png"
               alt="Logo"
-              className="w-9 cursor-pointer "
+              className="w-32  cursor-pointer scale-150"
               onClick={() => {
                 window.location.href = "./";
               }}
@@ -78,7 +78,7 @@ export const Slider = () => {
           </div> */}
 
           <div
-            className="absolute top-0 left-0 right-0 w-full h-full  overflow-hidden select-none py-[155px]"
+            className="absolute top-0 left-0 right-0 w-full h-full  overflow-hidden select-none py-[113px]"
             style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
           >
             <img
@@ -98,7 +98,7 @@ export const Slider = () => {
               left: `calc(${sliderPosition}% - 1px)`,
             }}
           >
-            <div className="bg-red-400  absolute rounded-full h-3 w-3 scale-150 -left-1 top-[calc(50%)]" />
+            <div className="bg-red-400  absolute rounded-full h-3 w-3 scale-150 -left-1 top-[calc(55%)]" />
           </div>
           {/* <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white text-2xl font-bold  p-1 rounded-xl  ">
             {getTitle()}

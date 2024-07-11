@@ -86,6 +86,7 @@ import {
   FaFemale,
 } from "react-icons/fa";
 import { Slider } from "./slider";
+import ShimmerButton from "@/components/magicui/shimmer-button";
 
 const sectors = [
   {
@@ -234,13 +235,12 @@ const Services = () => {
           Take your free test now!
         </p>
 
-        <Link
-          href="/assesment"
-          className="  bg-black  text-white text-lg font-semibold  px-8 py-2 rounded-full mt-8
-          hover:bg-slate-300 hover:text-black transition duration-300 
-          "
-        >
-          Go to test
+        <Link href="/assesment" className="mt-8">
+          <ShimmerButton className="shadow-2xl">
+            <span className="whitespace-pre-wrap text-lg text-center font-medium leading-none tracking-tight text-white">
+              Go to Test
+            </span>
+          </ShimmerButton>
         </Link>
       </div>
     </div>

@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { MdEmail } from "react-icons/md";
 import { FaLinkedin, FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { ImWhatsapp } from "react-icons/im";
 
 const Footer = () => {
   return (
@@ -20,27 +22,33 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex flex-col gap-5 pt-4 justify-center items-center lg:justify-start lg:items-start">
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <MdEmail className="w-5 h-5" />
-            <h1 className="flex flex-col ">info@saaed.com</h1>
+            <h1 className="">info@saaed.com</h1>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <FaPhoneAlt className="w-5 h-5" />
-            <h1 className="flex flex-col  ">+971 55 678 5698</h1>
+            <h1 className="">+966 54 976 1269</h1>
           </div>
-          <div className="flex  gap-2">
+          <div className="flex  gap-1 lg:items-center">
             <FaLocationDot className="w-5 h-5" />
-
-            <h1 className="text-center  ">
-              12329 Laysen Valley ,Riyadh , Kingdom of Saudi Arabia
+            <h1 className="text-center">
+              {" "}
+              12329 Laysen Valley ,Riyadh , Saudi Arabia
             </h1>
           </div>
-          <a
-            href="https://www.linkedin.com/company/saaed-%D8%B3%D8%A7%D8%B9%D8%AF/?viewAsMember=true"
-            target="_blank"
-          >
-            <FaLinkedin className="w-6 h-6" />
-          </a>
+          <div className="flex gap-3 justify-center items-center">
+            <a href="https://wa.me/message/4RCIWW5URDJKB1" target="_blank">
+              {/* <img src="whatsapp.png" className="w-6 h-6" /> */}
+              <ImWhatsapp className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/saaed-%D8%B3%D8%A7%D8%B9%D8%AF/?viewAsMember=true"
+              target="_blank"
+            >
+              <FaLinkedin className="w-6 h-6" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

@@ -54,7 +54,7 @@ interface FormValues {
 }
 
 const Form = () => {
-  const [activeTab, setActiveTab] = useState("individual");
+  const [activeTab, setActiveTab] = useState("bussiness");
   const {
     register,
     handleSubmit,
@@ -119,7 +119,7 @@ const Form = () => {
       <h1 className="mb-6 text-xl font-semibold lg:text-2xl self-center">
         Booking Form
       </h1>
-      <div className="shadow rounded-full h-10 mt-4 flex relative items-center w-64 self-center">
+      <div className="shadow rounded-full h-10 mt-4 flex relative items-center w-72 self-center font-medium">
         <div className="w-full flex justify-center">
           <button onClick={() => setActiveTab("individual")}>Individual</button>
         </div>
@@ -128,7 +128,7 @@ const Form = () => {
         </div>
         <span
           className={`elSwitch bg-[#1f8598] shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute ${
-            activeTab === "individual" ? "left-1" : "left-[calc(50%+4px)]"
+            activeTab === "individual" ? "left-1" : "left-[calc(50%+-5px)]"
           }`}
         >
           {activeTab === "individual" ? "Individual" : "Business"}

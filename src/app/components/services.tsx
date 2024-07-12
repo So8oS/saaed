@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { useState } from "react";
+import { BorderBeam } from "@/components/magicui/border-beam";
 
 const services = {
   individual: [
@@ -138,9 +139,12 @@ const Services = () => {
         Our Services
       </h2>
 
-      <div className="flex justify-center mb-10 gap-3" data-aos="fade-up">
+      <div
+        className="flex justify-center mb-10 gap-3 font-medium"
+        data-aos="fade-up"
+      >
         <button
-          className={`px-4 py-2  ${
+          className={`px-4 py-2   ${
             activeTab === "business" ? "bg-black  text-white" : "bg-gray-200"
           } rounded-3xl`}
           onClick={() => setActiveTab("business")}
@@ -148,7 +152,7 @@ const Services = () => {
           Business
         </button>
         <button
-          className={`px-4 py-2  ${
+          className={`px-4 py-2   ${
             activeTab === "individual" ? "bg-black  text-white" : "bg-gray-200"
           } rounded-3xl`}
           onClick={() => setActiveTab("individual")}
@@ -164,7 +168,7 @@ const Services = () => {
             data-aos="fade-up"
             key={index}
             className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6
-            hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-125"
+            hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-125 relative"
           >
             <img
               src={`${service.icon}`}
@@ -175,6 +179,13 @@ const Services = () => {
               {service.service}
             </h3>
             <p className="text-center text-gray-600">{service.description}</p>
+            <BorderBeam
+              size={250}
+              duration={12}
+              delay={9}
+              colorFrom="#2fa2b6"
+              colorTo="#f4a896"
+            />
           </div>
         ))}
       </div>
@@ -211,7 +222,7 @@ const Services = () => {
               data-aos="fade-left"
               key={index}
               className="p-6 max-w-sm  bg-white rounded-xl shadow-md flex items-center space-x-4 
-              hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 overflow-x-hidden
+               transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 overflow-x-hidden
               "
             >
               <div className="flex-shrink-0 ">{sector.icon}</div>
@@ -231,8 +242,14 @@ const Services = () => {
         data-aos="fade-up"
       >
         <h1 className="text-5xl font-bold mb-4 ">Are you still confused?</h1>
-        <p className="text-lg md:text-xl  leading-relaxed  md:px-14">
+        <p className="text-xl font-medium  leading-relaxed  md:px-14 mb-3">
           Take your free test now!
+        </p>
+        <p className="px-10 md:px-20">
+          This assessment is designed to help you identify the type of coaching
+          that best suits your needs. Please answer the following questions
+          honestly. At the end of the test, you will receive a recommendation
+          based on your answers.
         </p>
 
         <Link href="/assesment" className="mt-8">

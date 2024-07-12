@@ -44,7 +44,7 @@ export const Slider = () => {
         onTouchEnd={handleInteractionEnd}
       >
         <div
-          className={`relative w-full  overflow-hidden select-none  rounded-xl bg-slate-100
+          className={`relative w-full  overflow-hidden select-none  rounded-xl bg-slate-100 border shadow-xl
          `}
           onMouseMove={handleMouseMove}
           onTouchMove={handleTouchMove}

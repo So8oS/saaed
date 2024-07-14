@@ -3,13 +3,247 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
+interface FormValues {
+  clientType: string;
+  name: string;
+  email: string;
+  telephone: string;
+  coachingType: string;
+  preferredDate: string;
+  message: string;
+  companyName: string;
+  responsibleName: string;
+  industry: string;
+  subIndustry: string;
+  otherIndustry: string;
+  city: string;
+  website: string;
+  phone: string;
+  question1: string;
+  question2: string;
+  question3: string;
+}
 
 const industries = [
-  { name: "Sector 1", value: "sector1" },
-  { name: "Sector 2", value: "sector2" },
-  { name: "Sector 3", value: "sector3" },
-  { name: "Sector 4", value: "sector4" },
-  { name: "Sector 5", value: "sector5" },
+  {
+    name: "Government and Public Sector",
+    value: "government_public_sector",
+    subcategories: [
+      "Government Agencies",
+      "Municipalities",
+      "Public Service Organizations",
+      "Regulatory Bodies",
+    ],
+  },
+  {
+    name: "Education",
+    value: "education",
+    subcategories: [
+      "Schools (Primary, Secondary, Higher Education)",
+      "Universities and Colleges",
+      "Educational Institutions and Training Centers",
+    ],
+  },
+  {
+    name: "Healthcare and Medicine",
+    value: "healthcare_medicine",
+    subcategories: [
+      "Hospitals",
+      "Medical Clinics",
+      "Health and Wellness Centers",
+      "Pharmaceutical Companies",
+    ],
+  },
+  {
+    name: "Information Technology (IT)",
+    value: "information_technology",
+    subcategories: [
+      "Software Development Firms",
+      "IT Consulting Companies",
+      "Tech Startups",
+      "Data Analytics Firms",
+    ],
+  },
+  {
+    name: "Sales Teams",
+    value: "sales_teams",
+    subcategories: [
+      "Corporate Sales Departments",
+      "Retail Sales Teams",
+      "B2B Sales Organizations",
+    ],
+  },
+  {
+    name: "Customer Experience and Servicing",
+    value: "customer_experience_servicing",
+    subcategories: [
+      "Customer Service Departments",
+      "Call Centers",
+      "Customer Experience Management Firms",
+    ],
+  },
+  {
+    name: "Finance and Banking",
+    value: "finance_banking",
+    subcategories: [
+      "Banks and Financial Institutions",
+      "Insurance Companies",
+      "Investment Firms",
+      "Accounting and Audit Firms",
+    ],
+  },
+  {
+    name: "Aviation and Air Transport Management",
+    value: "aviation_air_transport",
+    subcategories: [
+      "Airlines",
+      "Airport Management Firms",
+      "Aviation Training Centers",
+      "Aircraft Maintenance Companies",
+    ],
+  },
+  {
+    name: "Food and Beverage",
+    value: "food_beverage",
+    subcategories: [
+      "Restaurants and Cafes",
+      "Food Manufacturing Companies",
+      "Catering Services",
+      "Food Retailers and Distributors",
+    ],
+  },
+  {
+    name: "Tourism and Hospitality",
+    value: "tourism_hospitality",
+    subcategories: [
+      "Hotels and Resorts",
+      "Travel Agencies",
+      "Tour Operators",
+      "Event Planning Companies",
+    ],
+  },
+  {
+    name: "Retail and Consumer Goods",
+    value: "retail_consumer_goods",
+    subcategories: [
+      "Retail Chains and Stores",
+      "E-commerce Businesses",
+      "Consumer Goods Manufacturers",
+      "Fashion and Apparel Companies",
+    ],
+  },
+  {
+    name: "Real Estate",
+    value: "real_estate",
+    subcategories: [
+      "Real Estate Agencies",
+      "Property Management Firms",
+      "Construction Companies",
+      "Real Estate Developers",
+    ],
+  },
+  {
+    name: "Manufacturing and Industrial",
+    value: "manufacturing_industrial",
+    subcategories: [
+      "Manufacturing Plants",
+      "Industrial Equipment Companies",
+      "Automotive Manufacturers",
+      "Electronics and Electrical Goods Companies",
+    ],
+  },
+  {
+    name: "Legal and Professional Services",
+    value: "legal_professional_services",
+    subcategories: [
+      "Law Firms",
+      "Consulting Firms",
+      "Accounting Firms",
+      "Marketing and Advertising Agencies",
+    ],
+  },
+  {
+    name: "Nonprofit and Charitable Organizations",
+    value: "nonprofit_charitable",
+    subcategories: [
+      "Charities",
+      "Non-Governmental Organizations (NGOs)",
+      "Social Enterprises",
+      "Foundations",
+    ],
+  },
+  {
+    name: "Energy and Utilities",
+    value: "energy_utilities",
+    subcategories: [
+      "Oil and Gas Companies",
+      "Renewable Energy Firms",
+      "Utility Providers",
+      "Energy Consulting Firms",
+    ],
+  },
+  {
+    name: "Media and Entertainment",
+    value: "media_entertainment",
+    subcategories: [
+      "Media Production Companies",
+      "Broadcasting Companies",
+      "Publishing Houses",
+      "Entertainment Venues",
+    ],
+  },
+  {
+    name: "Transportation and Logistics",
+    value: "transportation_logistics",
+    subcategories: [
+      "Logistics and Freight Companies",
+      "Transportation Services",
+      "Shipping and Delivery Companies",
+      "Warehousing and Distribution Firms",
+    ],
+  },
+  {
+    name: "Agriculture and Agribusiness",
+    value: "agriculture_agribusiness",
+    subcategories: [
+      "Farming Operations",
+      "Agribusiness Companies",
+      "Food Processing Firms",
+    ],
+  },
+  {
+    name: "Sports and Recreation",
+    value: "sports_recreation",
+    subcategories: [
+      "Sports Teams and Clubs",
+      "Fitness Centers",
+      "Recreational Facilities",
+      "Sports Management Firms",
+    ],
+  },
+  {
+    name: "Telecommunications",
+    value: "telecommunications",
+    subcategories: [
+      "Telecom Service Providers",
+      "Mobile Network Operators",
+      "Internet Service Providers",
+      "Telecommunication Equipment Manufacturers",
+    ],
+  },
+  {
+    name: "Institutions of Research",
+    value: "institutions_research",
+    subcategories: [
+      "Research Institutes",
+      "Academic Research Centers",
+      "Corporate R&D Departments",
+    ],
+  },
+  {
+    name: "Other",
+    value: "other",
+  },
 ];
 
 const questions = [
@@ -19,11 +253,32 @@ const questions = [
 ];
 
 const cities = [
-  { name: "City 1", value: "city1" },
-  { name: "City 2", value: "city2" },
-  { name: "City 3", value: "city3" },
-  { name: "City 4", value: "city4" },
-  { name: "City 5", value: "city5" },
+  { value: "riyadh", name: "Riyadh" },
+  { value: "jeddah", name: "Jeddah" },
+  { value: "dammam", name: "Dammam" },
+  { value: "khobar", name: "Khobar" },
+  { value: "mecca", name: "Mecca" },
+  { value: "medina", name: "Medina" },
+  { value: "dhahran", name: "Dhahran" },
+  { value: "taif", name: "Taif" },
+  { value: "buraidah", name: "Buraidah" },
+  { value: "hufuf", name: "Hufuf" },
+  { value: "abha", name: "Abha" },
+  { value: "najran", name: "Najran" },
+  { value: "jubail", name: "Jubail" },
+  { value: "khamis_mushait", name: "Khamis Mushait" },
+  { value: "al_qatif", name: "Al Qatif" },
+  { value: "al_hasa", name: "Al Hasa" },
+  { value: "al_baha", name: "Al Baha" },
+  { value: "yamb", name: "Yamb" },
+  { value: "jizan", name: "Jizan" },
+  { value: "rafha", name: "Rafha" },
+  { value: "hail", name: "Hail" },
+  { value: "gcc_country_uae", name: "Other GCC Country - UAE" },
+  { value: "gcc_country_qatar", name: "Other GCC Country - Qatar" },
+  { value: "gcc_country_oman", name: "Other GCC Country - Oman" },
+  { value: "gcc_country_bahrain", name: "Other GCC Country - Bahrain" },
+  { value: "gcc_country_kuwait", name: "Other GCC Country - Kuwait" },
 ];
 
 const coachingTypes = [
@@ -54,14 +309,16 @@ interface FormValues {
 }
 
 const Form = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState("bussiness");
+  const [selectedIndustry, setSelectedIndustry] = useState("");
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = (data: FormValues) => {
     setIsSubmitting(true);
@@ -74,13 +331,15 @@ const Form = () => {
       preferredDate: data.preferredDate,
       message: data.message,
       clientType: activeTab,
+      industry:
+        selectedIndustry === "other" ? data.otherIndustry : data.industry,
+      subIndustry: data.subIndustry,
     };
 
     if (activeTab === "business") {
       Object.assign(templateParams, {
         companyName: data.companyName,
         responsibleName: data.responsibleName,
-        industry: data.industry,
         city: data.city,
         website: data.website,
         phone: data.phone,
@@ -112,6 +371,12 @@ const Form = () => {
           setIsSubmitting(false);
         }
       );
+  };
+
+  const handleIndustryChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedIndustry(event.target.value);
   };
 
   return (
@@ -204,6 +469,9 @@ const Form = () => {
                   })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
                 >
+                  <option value="" disabled selected>
+                    Select Coaching Type
+                  </option>
                   {coachingTypes.map((type, index) => (
                     <option key={index} value={type}>
                       {type}
@@ -284,46 +552,86 @@ const Form = () => {
               </div>
             </div>
             <div className="pt-4">
-              <label>Industry:</label>
-              <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
+              <div className="flex flex-col mb-4">
+                <label className="mb-2">Industry:</label>
                 <select
                   {...register("industry", {
-                    required: "Industry is required",
+                    required: activeTab === "business",
                   })}
-                  className="peer flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
+                  onChange={handleIndustryChange}
                 >
-                  {industries.map((industry, index) => (
-                    <option key={index} value={industry.value}>
+                  <option value="" disabled selected>
+                    Select Industry
+                  </option>
+                  {industries.map((industry) => (
+                    <option key={industry.value} value={industry.value}>
                       {industry.name}
                     </option>
                   ))}
                 </select>
                 {errors.industry && (
-                  <p className="text-red-500 text-sm">
-                    {errors.industry.message?.toString()}
-                  </p>
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
                 )}
               </div>
+
+              {selectedIndustry && (
+                <div className="flex flex-col mb-4">
+                  {industries.find((ind) => ind.value === selectedIndustry)
+                    ?.subcategories && (
+                    <div className="space-y-2 pl-2">
+                      {industries
+                        .find((industry) => industry.value === selectedIndustry)
+                        ?.subcategories?.map((subIndustry, index) => (
+                          <p key={index} className="text-gray-500 text-sm">
+                            {`- ${subIndustry}`}
+                          </p>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {selectedIndustry === "other" && (
+                <div className="flex flex-col mb-4">
+                  <label className="font-semibold mb-2">Other Industry</label>
+                  <input
+                    {...register("otherIndustry", {
+                      required: selectedIndustry === "other",
+                    })}
+                    className="px-4 py-2 border rounded-lg"
+                    placeholder="Please specify your industry"
+                  />
+                  {errors.otherIndustry && (
+                    <span className="text-red-500 text-sm">
+                      This field is required
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
             <div className="pt-4">
               <label>City:</label>
-              <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
-                <select
-                  {...register("city", { required: "City is required" })}
-                  className="peer flex w-full cursor-pointer rounded-lg select-none border p-2 px-3 text-sm text-gray-700 ring-blue-400 peer-checked:ring"
-                >
-                  {cities.map((city, index) => (
-                    <option key={index} value={city.value}>
-                      {city.name}
-                    </option>
-                  ))}
-                </select>
-                {errors.city && (
-                  <p className="text-red-500 text-sm">
-                    {errors.city.message?.toString()}
-                  </p>
-                )}
-              </div>
+              <select
+                {...register("city", { required: "City is required" })}
+                className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
+              >
+                <option value="" disabled selected>
+                  Select City
+                </option>
+                {cities.map((city, index) => (
+                  <option key={index} value={city.value}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
+              {errors.city && (
+                <p className="text-red-500 text-sm">
+                  {errors.city.message?.toString()}
+                </p>
+              )}
             </div>
             <div className="pt-4">
               <label>Website:</label>
@@ -387,7 +695,7 @@ const Form = () => {
                     {...register(`question${index + 1}`, {
                       required: `Answer to question ${index + 1} is required`,
                     })}
-                    className="mt-2 w-full rounded-md bg-gray-100 p-1"
+                    className="mt-2 w-full rounded-md bg-gray-100 p-2 "
                   ></textarea>
                   {errors[`question${index + 1}`] && (
                     <p className="text-red-500 text-sm">

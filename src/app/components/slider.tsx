@@ -1,26 +1,54 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const Slider = () => {
   const [sliderPosition, setSliderPosition] = useState(85);
   const [isDragging, setIsDragging] = useState(false);
+  const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
 
-  const handleMove = (clientX: number, rect: DOMRect) => {
+  useEffect(() => {
+    if (isDragging) return;
+
+    const interval = setInterval(() => {
+      setSliderPosition((prev) => {
+        const newPos = prev + direction * 0.5; // Adjust the speed of the transition
+        if (newPos >= 100) {
+          setDirection(-1);
+          return 100;
+        } else if (newPos <= 0) {
+          setDirection(1);
+          return 0;
+        }
+        return newPos;
+      });
+    }, 14); // Adjust the interval timing for smoother/faster transitions
+
+    return () => clearInterval(interval);
+  }, [direction, isDragging]);
+
+  const handleMove = (
+    clientX: number,
+    rect: { left: number; width: number }
+  ) => {
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
     const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
     setSliderPosition(percent);
   };
 
-  const handleMouseMove = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  const handleMouseMove = (event: {
+    currentTarget: { getBoundingClientRect: () => any };
+    clientX: any;
+  }) => {
     if (!isDragging) return;
     const rect = event.currentTarget.getBoundingClientRect();
     handleMove(event.clientX, rect);
   };
 
-  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+  const handleTouchMove = (event: {
+    currentTarget: { getBoundingClientRect: () => any };
+    touches: string | any[];
+  }) => {
     if (!isDragging) return;
     const rect = event.currentTarget.getBoundingClientRect();
     if (event.touches.length > 0) {
@@ -47,12 +75,13 @@ export const Slider = () => {
           className={`relative w-full  overflow-hidden select-none  rounded-xl bg-slate-100 border shadow-xl
          `}
           onMouseMove={handleMouseMove}
+          // @ts-ignore
           onTouchMove={handleTouchMove}
           onMouseDown={handleInteractionStart}
           onTouchStart={handleInteractionStart}
         >
           <div className="py-5  border border-white flex justify-center items-center  ">
-            <p className=" text-black text-2xl font-semibold ">{getTitle()}</p>
+            <p className=" text-slate-900 text-2xl font-bold ">{getTitle()}</p>
             <img
               src="./logofull.png"
               alt="Logo"
@@ -73,9 +102,6 @@ export const Slider = () => {
             alt="pic"
             className="w-full  h-64  lg:w-[35rem] lg:h-80 object-cover "
           />
-          {/* <div className="py-10  border-t border-white flex justify-center items-center">
-            <p className=" text-white text-2xl font-semibold">{getTitle()}</p>
-          </div> */}
 
           <div
             className="absolute top-0 left-0 right-0 w-full h-full  overflow-hidden select-none py-[113px]"
@@ -100,9 +126,6 @@ export const Slider = () => {
           >
             <div className="bg-red-400  absolute rounded-full h-3 w-3 scale-150 -left-1 top-[calc(55%)]" />
           </div>
-          {/* <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white text-2xl font-bold  p-1 rounded-xl  ">
-            {getTitle()}
-          </div> */}
         </div>
       </div>
     </div>

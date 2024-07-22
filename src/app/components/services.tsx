@@ -131,7 +131,7 @@ const Services = () => {
   const [activeTab, setActiveTab] = useState("business");
 
   return (
-    <div className="pt-16 flex flex-col justify-center items-center  ">
+    <div className="pt-16 flex flex-col justify-center items-center overflox  ">
       <h2
         className="text-4xl lg:text-5xl font-bold mb-10 text-center"
         data-aos="fade-up"
@@ -161,7 +161,7 @@ const Services = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 overflow-x-auto">
         {/* @ts-ignore */}
         {services[activeTab].map((service, index) => (
           <div
@@ -178,7 +178,7 @@ const Services = () => {
             <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
               {service.service}
             </h3>
-            <p className="text-center text-gray-600">{service.description}</p>
+            <p className="text-center ">{service.description}</p>
             <BorderBeam
               size={250}
               duration={12}
@@ -188,6 +188,36 @@ const Services = () => {
             />
           </div>
         ))}
+      </div>
+
+      <div
+        className="flex flex-col justify-center items-center gap-7 my-24 py-16 md:py-16 text-center bg-slate-50 shadow-2xl border rounded-xl"
+        data-aos="fade-up"
+      >
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          Why Choose Us?
+        </h2>
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-2">
+          Bespoke Coaching and Consulting Solutions
+        </h3>
+        <ul className="text-gray-600 flex flex-col gap-7  pl-1 list-inside list-disc">
+          <li className="text-sm md:text-base lg:text-xl leading-relaxed px-4 md:px-8 text-justify">
+            At SAAED, we specialize in providing bespoke coaching and consulting
+            solutions tailored to the unique needs of each entity we serve. Our
+            commitment is to deliver exceptional value by creating customized
+            programs that address specific challenges and goals.
+          </li>
+          <li className="text-sm md:text-base lg:text-xl leading-relaxed px-4 md:px-8 text-justify">
+            Whether you are a business, government agency, or any other
+            organization, we work closely with you to develop a distinctive
+            product that aligns perfectly with your requirements.
+          </li>
+          <li className="text-sm md:text-base lg:text-xl leading-relaxed px-4 md:px-8 text-justify">
+            Our mission is to empower you with the tools and strategies needed
+            for success, ensuring that our services are as unique and effective
+            as the organizations we support.
+          </li>
+        </ul>
       </div>
 
       <div className="flex flex-col lg:flex-row  gap-7 md:gap-20 py-16 md:py-36 ">

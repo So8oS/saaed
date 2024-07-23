@@ -191,7 +191,7 @@ const Services = () => {
       </div>
 
       <div
-        className="flex flex-col justify-center items-center gap-7 my-24 py-16 md:py-16 text-center bg-slate-50 shadow-2xl border rounded-xl"
+        className="flex flex-col justify-center items-center gap-7 my-24 py-16 md:py-16 text-center bg-white shadow-2xl border rounded-xl"
         data-aos="fade-up"
       >
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
@@ -266,7 +266,7 @@ const Services = () => {
         </div>
       </div>
 
-      <Slider />
+      {/* <Slider /> */}
       <div
         className=" flex flex-col justify-center items-center text-center py-12 border w-full mt-5 rounded-xl bg-slate-50 "
         data-aos="fade-up"

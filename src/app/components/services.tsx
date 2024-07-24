@@ -8,10 +8,10 @@ import { BorderBeam } from "@/components/magicui/border-beam";
 const services = {
   individual: [
     {
-      service: "Mental & Professional Health",
+      service: "Life Coaching",
       description:
-        "Workshops focused on mental health awareness and stress management.",
-      icon: "graduation-cap.png",
+        "Guidance for achieving personal growth, balance, and fulfillment.",
+      icon: "person.png",
     },
     {
       service: "Relationship Coaching",
@@ -20,30 +20,18 @@ const services = {
       icon: "team.png",
     },
     {
-      service: "Professional Coaching",
+      service: "Marriage Coaching",
+      description:
+        "Support for couples to improve their marriage and relationship.",
+      icon: "wedding-couple.png",
+    },
+    {
+      service: "Career Coaching",
       description: "Career development and performance enhancement support.",
       icon: "suitcase.png",
     },
-    {
-      service: "Personal Coaching",
-      description:
-        "Guidance for achieving personal growth, balance, and fulfillment.",
-      icon: "person.png",
-    },
   ],
   business: [
-    {
-      service: "Team Development Programs",
-      description:
-        "Tailored programs for team development and improving work culture.",
-      icon: "puzzle-piece.png",
-    },
-    {
-      service: "Communication Coaching",
-      description:
-        "Training to enhance clarity and effectiveness in communication.",
-      icon: "speak.png",
-    },
     {
       service: "Executive Coaching",
       description:
@@ -51,10 +39,50 @@ const services = {
       icon: "podium.png",
     },
     {
-      service: "Emotional Intelligence Tests",
+      service: "Team Development Programs",
+      description:
+        "Tailored programs for team development and improving work culture.",
+      icon: "puzzle-piece.png",
+    },
+    {
+      service: "Sales Coaching",
+      description: "Training to enhance sales skills and improve performance.",
+      icon: "sales.png",
+    },
+    {
+      service: "Performance Coaching",
+      description: "Support for enhancing performance and achieving goals.",
+      icon: "performance.png",
+    },
+    {
+      service: "Effective Communication Coaching",
+      description:
+        "Training to enhance clarity and effectiveness in communication.",
+      icon: "speak.png",
+    },
+    {
+      service: "Mental Health & Well-being Workshops",
+      description:
+        "Programs focused on improving mental health and well-being in the workplace.",
+      icon: "mental-health.png",
+    },
+    {
+      service: "Financial Coaching",
+      description:
+        "Guidance and training to improve financial literacy and management.",
+      icon: "finance.png",
+    },
+    {
+      service: "Emotional Intelligence Testing and Development",
       description:
         "Comprehensive evaluations to improve emotional intelligence.",
-      icon: "mental-health.png",
+      icon: "Emotional-Intelligence.png",
+    },
+    {
+      service: "Research and Workplace Analytics",
+      description:
+        "In-depth research and analytics to improve workplace efficiency and culture.",
+      icon: "analytics.png",
     },
   ],
 };

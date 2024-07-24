@@ -1,7 +1,6 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
 import React, { useState } from "react";
 import { BorderBeam } from "@/components/magicui/border-beam";
 
@@ -87,74 +86,6 @@ const services = {
   ],
 };
 
-const nums = [
-  {
-    icon: "certified.png",
-    title: "Certified",
-    text: "All trainers at Saaed are certified by the International Coaching Federation (ICF).",
-  },
-  {
-    icon: "user.png",
-    title: "Experienced",
-    text: "Our trainers have over 10 years of experience in the field of coaching.",
-  },
-  {
-    icon: "sales.png",
-    title: "Effective",
-    text: "Our coaching programs are designed to help you achieve your goals and improve your performance.",
-  },
-];
-
-import {
-  FaGraduationCap,
-  FaHospital,
-  FaLaptopCode,
-  FaUtensils,
-  FaRocket,
-  FaHandsHelping,
-  FaFemale,
-} from "react-icons/fa";
-import { Slider } from "./slider";
-import ShimmerButton from "@/components/magicui/shimmer-button";
-
-const sectors = [
-  {
-    title: "Education",
-    icon: <FaGraduationCap className="w-6 h-6" />,
-    description: "We provide educational solutions and support.",
-  },
-  {
-    title: "Healthcare and Pharmaceuticals",
-    icon: <FaHospital className="w-6 h-6" />,
-    description: "We serve the healthcare and pharmaceutical sectors.",
-  },
-  {
-    title: "Information Technology",
-    icon: <FaLaptopCode className="w-6 h-6" />,
-    description: "We offer IT services and solutions.",
-  },
-  {
-    title: "Food, Tourism, and Hospitality",
-    icon: <FaUtensils className="w-6 h-6" />,
-    description: "We work with the food, tourism, and hospitality industries.",
-  },
-  {
-    title: "Startups",
-    icon: <FaRocket className="w-6 h-6" />,
-    description: "We support startups in their growth and development.",
-  },
-  {
-    title: "Charities, Clinics, and Psychiatric Centers",
-    icon: <FaHandsHelping className="w-6 h-6" />,
-    description: "We assist charities, clinics, and psychiatric centers.",
-  },
-  {
-    title: "Women's Empowerment Institutions and Centers",
-    icon: <FaFemale className="w-6 h-6" />,
-    description: "We empower women through various institutions and centers.",
-  },
-];
-
 const Services = () => {
   const [activeTab, setActiveTab] = useState("business");
 
@@ -203,7 +134,7 @@ const Services = () => {
               alt={service.service}
               className="w-16 h-16 mb-4"
             />
-            <h3 className="text-xl font-semibold mb-2 text-center lg:h-16">
+            <h3 className="text-xl font-semibold mb-2 text-center lg:h-20">
               {service.service}
             </h3>
             <p className="text-center ">{service.description}</p>
@@ -216,107 +147,6 @@ const Services = () => {
             />
           </div>
         ))}
-      </div>
-
-      <div
-        className="flex flex-col justify-center items-center gap-7 my-24 py-16 md:py-16 text-center bg-white shadow-2xl border rounded-xl"
-        data-aos="fade-up"
-      >
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-          Why Choose Us?
-        </h2>
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-2">
-          Bespoke Coaching and Consulting Solutions
-        </h3>
-        <ul className="text-gray-600 flex flex-col gap-7  pl-1 list-inside list-disc">
-          <li className="text-sm md:text-base lg:text-xl leading-relaxed px-4 md:px-8 text-justify">
-            At SAAED, we specialize in providing bespoke coaching and consulting
-            solutions tailored to the unique needs of each entity we serve. Our
-            commitment is to deliver exceptional value by creating customized
-            programs that address specific challenges and goals.
-          </li>
-          <li className="text-sm md:text-base lg:text-xl leading-relaxed px-4 md:px-8 text-justify">
-            Whether you are a business, government agency, or any other
-            organization, we work closely with you to develop a distinctive
-            product that aligns perfectly with your requirements.
-          </li>
-          <li className="text-sm md:text-base lg:text-xl leading-relaxed px-4 md:px-8 text-justify">
-            Our mission is to empower you with the tools and strategies needed
-            for success, ensuring that our services are as unique and effective
-            as the organizations we support.
-          </li>
-        </ul>
-      </div>
-
-      <div className="flex flex-col lg:flex-row  gap-7 md:gap-20 py-16 md:py-36 ">
-        {nums.map((num, index) => (
-          <div
-            key={index}
-            data-aos="fade-up"
-            className="flex flex-col justify-center items-center p-10 rounded-lg border-t-8 border-r-8 border-t-[#1f8598] border-r-[#ed8972] bg-white shadow-2xl 
-              hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 
-          "
-          >
-            <div className="flex flex-col justify-center items-center gap-6 text-center px-2 min-w-[250px]">
-              <img src={num.icon} alt="icon" className="w-16 h-16" />
-              <h1 className="text-xl font-semibold">{num.title}</h1>
-              <p className="text-slate-500 italic">{num.text}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8">
-        <h2
-          className="text-4xl lg:text-5xl font-bold mb-10 text-center"
-          data-aos="fade-up"
-        >
-          Sectors We Serve
-        </h2>
-
-        <div className="grid gap-8 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 overflow-x-hidden p-1">
-          {sectors.map((sector, index) => (
-            <div
-              data-aos="fade-left"
-              key={index}
-              className="p-6 max-w-sm  bg-white rounded-xl shadow-md flex items-center space-x-4 
-               transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 overflow-x-hidden
-              "
-            >
-              <div className="flex-shrink-0 ">{sector.icon}</div>
-              <div>
-                <div className="text-xl font-medium text-black">
-                  {sector.title}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* <Slider /> */}
-      <div
-        className=" flex flex-col justify-center items-center text-center py-12 border w-full mt-5 rounded-xl bg-slate-50 "
-        data-aos="fade-up"
-      >
-        <h1 className="text-5xl font-bold mb-4 ">Are you still confused?</h1>
-        <p className="text-xl font-medium  leading-relaxed  md:px-14 mb-3">
-          Take your free test now!
-        </p>
-        <p className="px-10 md:px-20">
-          This assessment is designed to help you identify the type of coaching
-          that best suits your needs. Please answer the following questions
-          honestly. At the end of the test, you will receive a recommendation
-          based on your answers.
-        </p>
-
-        <Link href="/assesment" className="mt-8">
-          <ShimmerButton className="shadow-2xl">
-            <span className="whitespace-pre-wrap text-lg text-center font-medium leading-none tracking-tight text-white">
-              Go to Test
-            </span>
-          </ShimmerButton>
-        </Link>
       </div>
     </div>
   );

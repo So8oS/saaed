@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
 interface FormValues {
+  country: any;
   clientType: string;
   name: string;
   email: string;
@@ -274,12 +275,10 @@ const cities = [
   { value: "jizan", name: "Jizan" },
   { value: "rafha", name: "Rafha" },
   { value: "hail", name: "Hail" },
-  { value: "gcc_country_uae", name: "Other GCC Country - UAE" },
-  { value: "gcc_country_qatar", name: "Other GCC Country - Qatar" },
-  { value: "gcc_country_oman", name: "Other GCC Country - Oman" },
-  { value: "gcc_country_bahrain", name: "Other GCC Country - Bahrain" },
-  { value: "gcc_country_kuwait", name: "Other GCC Country - Kuwait" },
+  { value: "other", name: "Other" },
 ];
+
+const gccCountries = ["UAE", "Qatar", "Oman", "Bahrain", "Kuwait"];
 
 const coachingTypes = [
   "Relationship coaching",
@@ -289,29 +288,11 @@ const coachingTypes = [
   "Child coaching",
 ];
 
-interface FormValues {
-  clientType: string;
-  name: string;
-  email: string;
-  telephone: string;
-  coachingType: string;
-  preferredDate: string;
-  message: string;
-  companyName: string;
-  responsibleName: string;
-  industry: string;
-  city: string;
-  website: string;
-  phone: string;
-  question1: string;
-  question2: string;
-  question3: string;
-}
-
 const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState("bussiness");
   const [selectedIndustry, setSelectedIndustry] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
 
   const {
     register,
@@ -340,7 +321,7 @@ const Form = () => {
       Object.assign(templateParams, {
         companyName: data.companyName,
         responsibleName: data.responsibleName,
-        city: data.city,
+        city: selectedCity === "other" ? data.country : data.city,
         website: data.website,
         phone: data.phone,
         question1: data.question1,
@@ -377,6 +358,10 @@ const Form = () => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedIndustry(event.target.value);
+  };
+
+  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCity(event.target.value);
   };
 
   return (
@@ -617,6 +602,7 @@ const Form = () => {
               <select
                 {...register("city", { required: "City is required" })}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
+                onChange={handleCityChange}
               >
                 <option value="" disabled selected>
                   Select City
@@ -633,6 +619,31 @@ const Form = () => {
                 </p>
               )}
             </div>
+            {selectedCity === "other" && (
+              // select from gcc countries
+              <div className="pt-4">
+                <label>Country:</label>
+                <select
+                  {...register("country", { required: "Country is required" })}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
+                >
+                  <option value="" disabled selected>
+                    Select Country
+                  </option>
+                  {gccCountries.map((country, index) => (
+                    <option key={index} value={country}>
+                      {country}
+                    </option>
+                  ))}
+                </select>
+                {errors.country && (
+                  <p className="text-red-500 text-sm">
+                    {errors.country.message?.toString()}
+                  </p>
+                )}
+              </div>
+            )}
+
             <div className="pt-4">
               <label>Website:</label>
               <input

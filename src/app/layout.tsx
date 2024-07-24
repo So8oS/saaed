@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import Aos from "./components/aos";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FloatingButton from "./components/floatingButton";
 
 export const metadata: Metadata = {
   title: "SAAED",
@@ -29,11 +30,14 @@ export default function RootLayout({
       </head>
       <body className=" font-Dubai flex flex-col ">
         <Aos />
-
         <Navbar />
+
+        {/* ---------- */}
         <div className="px-5 md:px-8 container mx-auto max-w-6xl py-16">
           {children}
         </div>
+        {/* ---------- */}
+        <FloatingButton />
         <Footer />
         <ToastContainer
           position="top-center"

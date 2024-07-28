@@ -262,6 +262,14 @@
     "Submit": "إرسال",
     "Get Started": "ابدأ",
     "Booking Form": "نموذج الحجز",
-    "Company Name": "اسم الشركة"
+    "Company Name": "اسم الشركة",
+    "Phone:": ":الهاتف",
+    "Form submitted successfully 🎉\n Saeed team will contact you soon!": "Form submitted successfully 🎉\n Saeed team will contact you soon!",
+    "Website is required": "الموقع الإلكتروني مطلوب",
+    "Email": "البريد الإلكتروني",
+    "Phone is required": "الهاتف مطلوب",
+    " Answer to question 1 is required": "الإجابة على السؤال 1 مطلوبة",
+    " Answer to question 2 is required": "الإجابة على السؤال 2 مطلوبة",
+    " Answer to question 3 is required": "الإجابة على السؤال 3 مطلوبة"
   }
 }

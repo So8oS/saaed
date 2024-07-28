@@ -264,6 +264,13 @@
     "Submit": "Submit",
     "Get Started": "Get Started",
     "Booking Form": "Booking Form",
-    "Company Name": "Company Name"
+    "Company Name": "Company Name",
+    "Phone:": "Phone:",
+    "Form submitted successfully 🎉\n Saeed team will contact you soon!": "Form submitted successfully 🎉\n Saeed team will contact you soon!",
+    "Website is required": "Website is required",
+    "Phone is required": "Phone is required",
+    "Answer to question 1 is required": "Answer to question 1 is required",
+    "Answer to question 2 is required": "Answer to question 2 is required",
+    "Answer to question 3 is required": "Answer to question 3 is required"
   }
 }

@@ -304,32 +304,19 @@ const Form = () => {
 
   const onSubmit = (data: FormValues) => {
     setIsSubmitting(true);
-    const templateParams = {
-      to_name: "Saaed",
-      from_name: data.name,
-      email: data.email,
-      telephone: data.telephone,
-      coachingType: data.coachingType,
-      preferredDate: data.preferredDate,
-      message: data.message,
-      clientType: activeTab,
-      industry:
-        selectedIndustry === "other" ? data.otherIndustry : data.industry,
-      subIndustry: data.subIndustry,
-    };
+    console.log(data);
 
-    if (activeTab === "business") {
-      Object.assign(templateParams, {
-        companyName: data.companyName,
-        responsibleName: data.responsibleName,
-        city: selectedCity === "other" ? data.country : data.city,
-        website: data.website,
-        phone: data.phone,
-        question1: data.question1,
-        question2: data.question2,
-        question3: data.question3,
-      });
-    }
+    const individual = `CLIENT BOOKING\nClient Type:${activeTab}\nName: ${data.name}\nEmail: ${data.email}\nTelephone: ${data.telephone}\nCoaching Type: ${data.coachingType}\nPreferred Date: ${data.preferredDate}\nMessage: ${data.message}`;
+
+    const business = `CLIENT BOOKING\nClient Type:${activeTab}\nCompany Name: ${data.companyName}\nResponsible Name: ${data.responsibleName}\nIndustry: ${data.industry}\nCity: ${data.city}\nWebsite: ${data.website}\nPhone: ${data.phone}\nQuestions:\n1- ${data.question1}\n2- ${data.question2}\n3- ${data.question3}`;
+
+    const messageContent = activeTab === "individual" ? individual : business;
+    console.log(messageContent);
+
+    const templateParams = {
+      to_name: "Saeed Team",
+      message: messageContent,
+    };
 
     emailjs
       .send(
@@ -400,7 +387,7 @@ const Form = () => {
             <input
               type="hidden"
               value="individual"
-              {...register("clientType")}
+              // {...register("clientType")}
             />
             <div className="grid gap-4 md:grid-cols-2">
               <div>

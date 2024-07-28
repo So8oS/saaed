@@ -20,12 +20,18 @@ export const Contactus = () => {
   const sendEmail: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
 
+    const messageContent = `Name: ${data.user_name}\nEmail: ${data.user_email}\nPhone: ${data.user_phone}\nMessage: ${data.message}`;
+
+    const templateParams = {
+      to_name: "Saeed Team",
+      message: messageContent,
+    };
+
     try {
       await emailjs.send(
-        "gmail",
-        "template_3nth5o9",
-        // @ts-ignore
-        data,
+        "sa3ed",
+        process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE ?? "",
+        templateParams,
         process.env.NEXT_PUBLIC_EMAIL_JS
       );
       reset();

@@ -13,6 +13,7 @@ import { IoHome } from "react-icons/io5";
 import { BsInfoCircleFill } from "react-icons/bs";
 import Link from "next/link";
 import Language from "./language";
+import { useTranslations } from "next-intl";
 
 const routes = [
   {
@@ -29,6 +30,7 @@ const routes = [
 
 const Sidbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("Navbar");
 
   const toggleSheet = () => setIsOpen(!isOpen);
   const closeSheet = () => setIsOpen(false);
@@ -53,7 +55,7 @@ const Sidbar = () => {
                 onClick={closeSheet}
               >
                 {route.icon}
-                <h1 className="self-start cursor-pointer">{route.name}</h1>
+                <h1 className="self-start cursor-pointer">{t(route.name)}</h1>
               </Link>
             ))}
           </div>

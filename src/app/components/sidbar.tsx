@@ -12,6 +12,7 @@ import { CiMenuFries } from "react-icons/ci";
 import { IoHome } from "react-icons/io5";
 import { BsInfoCircleFill } from "react-icons/bs";
 import Link from "next/link";
+import Language from "./language";
 
 const routes = [
   {
@@ -27,7 +28,6 @@ const routes = [
 ];
 
 const Sidbar = () => {
-  const [lang, setLang] = useState("en");
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSheet = () => setIsOpen(!isOpen);
@@ -57,23 +57,7 @@ const Sidbar = () => {
               </Link>
             ))}
           </div>
-          <div className="flex flex-col justify-center items-center gap-5">
-            {lang === "en" ? (
-              <img
-                src="./ar.png"
-                alt="Language"
-                className="w-12 cursor-pointer self-center"
-                onClick={() => setLang("ar")}
-              />
-            ) : (
-              <img
-                src="./en.png"
-                alt="Language"
-                className="w-12 cursor-pointer self-center"
-                onClick={() => setLang("en")}
-              />
-            )}
-          </div>
+          <Language />
         </SheetContent>
       </Sheet>
     </div>

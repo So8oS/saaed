@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from "react";
 import Sidbar from "./sidbar";
 import Link from "next/link";
-// import Sidbar from './sidbar';
+import Language from "./language";
 
 const routes = [
   {
@@ -19,8 +19,6 @@ const routes = [
 ];
 
 const Navbar = () => {
-  const [lang, setLang] = useState("en");
-
   return (
     <div
       className={`  flex items-center   py-3  px-5 xl:px-0  justify-between font-Lora   text-xl container mx-auto max-w-6xl border-b border-slate-300  `}
@@ -47,24 +45,7 @@ const Navbar = () => {
             {route.name}
           </Link>
         ))}
-        {lang === "en" ? (
-          <img
-            src="./ar.png"
-            alt="Language"
-            className="w-8 cursor-pointer"
-            onClick={() => setLang("ar")}
-          />
-        ) : (
-          <img
-            src="./en.png"
-            alt="Language"
-            className="w-8 cursor-pointer"
-            onClick={() => setLang("en")}
-          />
-        )}
-        {/* <button 
-          className='bg-black text-white px-4 py-1 rounded-full hover:bg-slate-300 hover:text-black transition duration-300'
-          >Contact us</button> */}
+        <Language />
       </ul>
       <div className="md:hidden">
         <Sidbar />

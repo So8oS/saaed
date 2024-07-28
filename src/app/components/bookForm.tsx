@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
+import { useTranslations } from "next-intl";
 interface FormValues {
   country: any;
   clientType: string;
@@ -364,24 +365,30 @@ const Form = () => {
     setSelectedCity(event.target.value);
   };
 
+  const t = useTranslations("Booking");
+
   return (
     <div className="overflow-scroll border flex flex-col justify-center items-center border-gray-100 space-y-4 max-w-screen-xl bg-white p-6 m-3 lg:p-10 shadow-2xl rounded-lg border-t-8 border-r-8 border-t-[#1f8598] border-r-[#ed8972]">
       <h1 className="mb-6 text-xl font-semibold lg:text-2xl self-center">
-        Booking Form
+        {t("Booking Form")}
       </h1>
       <div className="shadow rounded-full h-10 mt-4 flex relative items-center w-72 self-center font-medium">
         <div className="w-full flex justify-center">
-          <button onClick={() => setActiveTab("individual")}>Individual</button>
+          <button onClick={() => setActiveTab("individual")}>
+            {t("Individual")}
+          </button>
         </div>
         <div className="w-full flex justify-center">
-          <button onClick={() => setActiveTab("business")}>Business</button>
+          <button onClick={() => setActiveTab("business")}>
+            {t("Business")}
+          </button>
         </div>
         <span
           className={`elSwitch bg-[#1f8598] shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute ${
             activeTab === "individual" ? "left-1" : "left-[calc(50%+-5px)]"
           }`}
         >
-          {activeTab === "individual" ? "Individual" : "Business"}
+          {activeTab === "individual" ? t("Individual") : t("Business")}
         </span>
       </div>
       {/* @ts-ignore */}
@@ -395,11 +402,13 @@ const Form = () => {
             />
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label>Name:</label>
+                <label>{t("Name:")}</label>
                 <input
                   type="text"
-                  placeholder="Name"
-                  {...register("name", { required: "Name is required" })}
+                  placeholder={t("Name")}
+                  {...register("name", {
+                    required: t("This field is required"),
+                  })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                 />
                 {errors.name && (
@@ -409,15 +418,15 @@ const Form = () => {
                 )}
               </div>
               <div>
-                <label>Email:</label>
+                <label>{t("Email:")}</label>
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder={t("Email")}
                   {...register("email", {
-                    required: "Email is required",
+                    required: t("This field is required"),
                     pattern: {
                       value: /^\S+@\S+$/i,
-                      message: "Entered value does not match email format",
+                      message: t("Entered value does not match email format"),
                     },
                   })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
@@ -430,12 +439,12 @@ const Form = () => {
               </div>
             </div>
             <div className="pt-4">
-              <label>Telephone:</label>
+              <label>{t("Telephone:")}</label>
               <input
                 type="tel"
-                placeholder="Telephone"
+                placeholder={t("Telephone")}
                 {...register("telephone", {
-                  required: "Telephone is required",
+                  required: t("This field is required"),
                 })}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
               />
@@ -447,19 +456,19 @@ const Form = () => {
             </div>
             <div className="grid gap-4 md:grid-cols-2 pt-4">
               <div>
-                <label>Coaching Type:</label>
+                <label>{t("Coaching Type:")}</label>
                 <select
                   {...register("coachingType", {
-                    required: "Coaching type is required",
+                    required: t("This field is required"),
                   })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
                 >
                   <option value="" disabled selected>
-                    Select Coaching Type
+                    {t("Select Coaching Type")}
                   </option>
                   {coachingTypes.map((type, index) => (
                     <option key={index} value={type}>
-                      {type}
+                      {t(type)}
                     </option>
                   ))}
                 </select>
@@ -470,11 +479,11 @@ const Form = () => {
                 )}
               </div>
               <div>
-                <label>Preferred Date:</label>
+                <label>{t("Preferred Date:")}</label>
                 <input
                   type="date"
                   {...register("preferredDate", {
-                    required: "Preferred date is required",
+                    required: t("This field is required"),
                   })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
                 />
@@ -486,10 +495,12 @@ const Form = () => {
               </div>
             </div>
             <div className="py-4">
-              <label>Message:</label>
+              <label>{t("Message:")}</label>
               <textarea
                 rows={4}
-                {...register("message", { required: "Message is required" })}
+                {...register("message", {
+                  required: t("This field is required"),
+                })}
                 className="mt-2 w-full rounded-md bg-gray-100 p-1"
               ></textarea>
               {errors.message && (
@@ -504,12 +515,12 @@ const Form = () => {
             <input type="hidden" value="business" {...register("clientType")} />
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label>Company Name:</label>
+                <label>{t("Company Name:")}</label>
                 <input
                   type="text"
-                  placeholder="Company L.L.C"
+                  placeholder={t("Company Name")}
                   {...register("companyName", {
-                    required: "Company name is required",
+                    required: t("This field is required"),
                   })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                 />
@@ -520,12 +531,12 @@ const Form = () => {
                 )}
               </div>
               <div>
-                <label>Name:</label>
+                <label>{t("Name:")}</label>
                 <input
                   type="text"
-                  placeholder="Name"
+                  placeholder={t("Name")}
                   {...register("responsibleName", {
-                    required: "Name is required",
+                    required: t("This field is required"),
                   })}
                   className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
                 />
@@ -538,7 +549,7 @@ const Form = () => {
             </div>
             <div className="pt-4">
               <div className="flex flex-col mb-4">
-                <label className="mb-2">Industry:</label>
+                <label className="mb-2">{t("Industry:")}</label>
                 <select
                   {...register("industry", {
                     required: activeTab === "business",
@@ -547,17 +558,17 @@ const Form = () => {
                   onChange={handleIndustryChange}
                 >
                   <option value="" disabled selected>
-                    Select Industry
+                    {t("Select Industry")}
                   </option>
                   {industries.map((industry) => (
                     <option key={industry.value} value={industry.value}>
-                      {industry.name}
+                      {t(industry.name)}
                     </option>
                   ))}
                 </select>
                 {errors.industry && (
                   <span className="text-red-500 text-sm">
-                    This field is required
+                    {t("This field is required")}
                   </span>
                 )}
               </div>
@@ -571,7 +582,7 @@ const Form = () => {
                         .find((industry) => industry.value === selectedIndustry)
                         ?.subcategories?.map((subIndustry, index) => (
                           <p key={index} className="text-gray-500 text-sm">
-                            {`- ${subIndustry}`}
+                            {`- ${t(subIndustry)}`}
                           </p>
                         ))}
                     </div>
@@ -581,35 +592,37 @@ const Form = () => {
 
               {selectedIndustry === "other" && (
                 <div className="flex flex-col mb-4">
-                  <label className="font-semibold mb-2">Other Industry</label>
+                  <label className="font-semibold mb-2">
+                    {t("Other Industry")}
+                  </label>
                   <input
                     {...register("otherIndustry", {
                       required: selectedIndustry === "other",
                     })}
                     className="px-4 py-2 border rounded-lg"
-                    placeholder="Please specify your industry"
+                    placeholder={t("Please specify your industry")}
                   />
                   {errors.otherIndustry && (
                     <span className="text-red-500 text-sm">
-                      This field is required
+                      {t("This field is required")}
                     </span>
                   )}
                 </div>
               )}
             </div>
             <div className="pt-4">
-              <label>City:</label>
+              <label>{t("Select City")}</label>
               <select
-                {...register("city", { required: "City is required" })}
+                {...register("city", { required: t("This field is required") })}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
                 onChange={handleCityChange}
               >
                 <option value="" disabled selected>
-                  Select City
+                  {t("Select City")}
                 </option>
-                {cities.map((city, index) => (
-                  <option key={index} value={city.value}>
-                    {city.name}
+                {cities.map((city) => (
+                  <option key={city.value} value={city.value}>
+                    {t(city.name)}
                   </option>
                 ))}
               </select>
@@ -620,132 +633,45 @@ const Form = () => {
               )}
             </div>
             {selectedCity === "other" && (
-              // select from gcc countries
-              <div className="pt-4">
-                <label>Country:</label>
-                <select
-                  {...register("country", { required: "Country is required" })}
-                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
-                >
-                  <option value="" disabled selected>
-                    Select Country
-                  </option>
-                  {gccCountries.map((country, index) => (
-                    <option key={index} value={country}>
-                      {country}
-                    </option>
-                  ))}
-                </select>
-                {errors.country && (
-                  <p className="text-red-500 text-sm">
-                    {errors.country.message?.toString()}
-                  </p>
+              <div className="flex flex-col mb-4">
+                <label className="font-semibold mb-2">{t("Other City")}</label>
+                <input
+                  {...register("otherCity", {
+                    required: selectedCity === "other",
+                  })}
+                  className="px-4 py-2 border rounded-lg"
+                  placeholder={t("Please specify your city")}
+                />
+                {errors.otherCity && (
+                  <span className="text-red-500 text-sm">
+                    {t("This field is required")}
+                  </span>
                 )}
               </div>
             )}
-
-            <div className="pt-4">
-              <label>Website:</label>
-              <input
-                type="text"
-                placeholder="https://example.com"
-                {...register("website", { required: "Website is required" })}
-                className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-              />
-              {errors.website && (
-                <p className="text-red-500 text-sm">
-                  {errors.website.message?.toString()}
-                </p>
-              )}
-            </div>
-            <div className="pt-4">
-              <label>Email Address:</label>
-              <input
-                type="email"
-                placeholder="Info@example.com"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Entered value does not match email format",
-                  },
+            <div className="py-4">
+              <label>{t("Message:")}</label>
+              <textarea
+                rows={4}
+                {...register("message", {
+                  required: t("This field is required"),
                 })}
-                className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-              />
-              {errors.email && (
+                className="mt-2 w-full rounded-md bg-gray-100 p-1"
+              ></textarea>
+              {errors.message && (
                 <p className="text-red-500 text-sm">
-                  {errors.email.message?.toString()}
+                  {errors.message.message?.toString()}
                 </p>
               )}
-            </div>
-            <div className="grid gap-4 lg:grid-cols-2 pt-4">
-              <div>
-                <label>Phone: </label>
-                <input
-                  type="text"
-                  placeholder="+543 5445 0543"
-                  {...register("phone", { required: "Phone is required" })}
-                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
-                />
-                {errors.phone && (
-                  <p className="text-red-500 text-sm">
-                    {errors.phone.message?.toString()}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="my-16">
-              <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700" />
-            </div>
-            <div className="flex flex-col gap-8">
-              {questions.map((question, index) => (
-                <div key={index}>
-                  <label className="">{`${index + 1}- ${question}`}</label>
-                  <textarea
-                    rows={4}
-                    {...register(`question${index + 1}`, {
-                      required: `Answer to question ${index + 1} is required`,
-                    })}
-                    className="mt-2 w-full rounded-md bg-gray-100 p-2 "
-                  ></textarea>
-                  {errors[`question${index + 1}`] && (
-                    <p className="text-red-500 text-sm">
-                      {errors[`question${index + 1}`]?.message?.toString()}
-                    </p>
-                  )}
-                </div>
-              ))}
             </div>
           </>
         )}
-        <div>
+        <div className="text-center">
           <button
             type="submit"
-            className={`mt-5 w-full rounded-md bg-[#1f8598] p-2 text-center font-semibold text-white cursor-pointer  disabled:opacity-65 disabled:cursor-not-allowed `}
-            disabled={isSubmitting}
+            className="w-full text-white bg-[#ed8972] rounded-lg p-2 my-4 md:w-1/2 md:m-auto"
           >
-            {isSubmitting ? (
-              <svg
-                aria-hidden="true"
-                className="inline w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-                viewBox="0 0 100 101"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                  fill="currentFill"
-                />
-              </svg>
-            ) : activeTab === "individual" ? (
-              "Submit"
-            ) : (
-              "Get Started"
-            )}
+            {t("Submit")}
           </button>
         </div>
       </form>

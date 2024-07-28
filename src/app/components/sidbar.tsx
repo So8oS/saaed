@@ -43,7 +43,7 @@ const Sidbar = () => {
           />
         </SheetTrigger>
         <SheetContent className="flex flex-col justify-between gap-8 font-Lora border-r border-t border-l border-black">
-          <img src="./logo.png" alt="Logo" className="w-20 pt-8 self-center" />
+          <img src="/logo.png" alt="Logo" className="w-20 pt-8 self-center" />
           <div className="flex flex-col text-2xl gap-8 border-y border-slate-900 py-5">
             {routes.map((route, index) => (
               <Link

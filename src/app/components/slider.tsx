@@ -83,7 +83,7 @@ export const Slider = () => {
           <div className="py-5  border border-white flex justify-center items-center  ">
             <p className=" text-slate-900 text-2xl font-bold ">{getTitle()}</p>
             <img
-              src="./logofull.png"
+              src="/logofull.png"
               alt="Logo"
               className="w-32  cursor-pointer scale-150"
               onClick={() => {

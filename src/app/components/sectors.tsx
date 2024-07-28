@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import {
   FaGraduationCap,
@@ -8,53 +9,59 @@ import {
   FaHandsHelping,
   FaFemale,
 } from "react-icons/fa";
+import { useTranslations } from "next-intl";
+
+const iconClass = "w-6 h-6";
 
 const sectors = [
   {
-    title: "Education",
-    icon: <FaGraduationCap className="w-6 h-6" />,
-    description: "We provide educational solutions and support.",
+    titleKey: "Education",
+    icon: <FaGraduationCap className={iconClass} />,
+    descriptionKey: "We provide educational solutions and support",
   },
   {
-    title: "Healthcare and Pharmaceuticals",
-    icon: <FaHospital className="w-6 h-6" />,
-    description: "We serve the healthcare and pharmaceutical sectors.",
+    titleKey: "Healthcare and Pharmaceuticals",
+    icon: <FaHospital className={iconClass} />,
+    descriptionKey: "We serve the healthcare and pharmaceutical sectors",
   },
   {
-    title: "Information Technology",
-    icon: <FaLaptopCode className="w-6 h-6" />,
-    description: "We offer IT services and solutions.",
+    titleKey: "Information Technology",
+    icon: <FaLaptopCode className={iconClass} />,
+    descriptionKey: "We offer IT services and solutions",
   },
   {
-    title: "Food, Tourism, and Hospitality",
-    icon: <FaUtensils className="w-6 h-6" />,
-    description: "We work with the food, tourism, and hospitality industries.",
+    titleKey: "Food, Tourism, and Hospitality",
+    icon: <FaUtensils className={iconClass} />,
+    descriptionKey:
+      "We work with the food, tourism, and hospitality industries",
   },
   {
-    title: "Startups",
-    icon: <FaRocket className="w-6 h-6" />,
-    description: "We support startups in their growth and development.",
+    titleKey: "Startups",
+    icon: <FaRocket className={iconClass} />,
+    descriptionKey: "We support startups in their growth and development",
   },
   {
-    title: "Charities, Clinics, and Psychiatric Centers",
-    icon: <FaHandsHelping className="w-6 h-6" />,
-    description: "We assist charities, clinics, and psychiatric centers.",
+    titleKey: "Charities, Clinics, and Psychiatric Centers",
+    icon: <FaHandsHelping className={iconClass} />,
+    descriptionKey: "We assist charities, clinics, and psychiatric centers",
   },
   {
-    title: "Women's Empowerment Institutions and Centers",
-    icon: <FaFemale className="w-6 h-6" />,
-    description: "We empower women through various institutions and centers.",
+    titleKey: "Women's Empowerment Institutions and Centers",
+    icon: <FaFemale className={iconClass} />,
+    descriptionKey: "We empower women through various institutions and centers",
   },
 ];
 
 const Sectors = () => {
+  const t = useTranslations("Sectors");
+
   return (
     <div className="max-w-7xl mx-auto pt-16 px-4 sm:px-6 lg:px-8">
       <h2
         className="text-4xl lg:text-5xl font-bold mb-10 text-center"
         data-aos="fade-up"
       >
-        Sectors We Serve
+        {t("Sectors We Serve")}
       </h2>
 
       <div className="grid gap-8 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 overflow-x-hidden p-1">
@@ -62,15 +69,15 @@ const Sectors = () => {
           <div
             data-aos="fade-left"
             key={index}
-            className="p-6 max-w-sm  bg-white rounded-xl shadow-md flex items-center space-x-4 
-               transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 overflow-x-hidden
-              "
+            className="p-6 max-w-sm bg-white rounded-xl shadow-md flex items-center space-x-4 
+               transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 overflow-x-hidden"
           >
             <div className="flex-shrink-0 ">{sector.icon}</div>
             <div>
               <div className="text-xl font-medium text-black">
-                {sector.title}
+                {t(sector.titleKey)}
               </div>
+              <p className="text-gray-500">{t(sector.descriptionKey)}</p>
             </div>
           </div>
         ))}

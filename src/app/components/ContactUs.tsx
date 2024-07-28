@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
+import { useTranslations } from "next-intl";
 
 interface IFormInput {
   user_name: string;
@@ -14,6 +15,7 @@ interface IFormInput {
 export const Contactus = () => {
   const { register, handleSubmit, reset } = useForm<IFormInput>();
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations("Contact");
 
   const sendEmail: SubmitHandler<IFormInput> = async (data) => {
     setIsLoading(true);
@@ -40,7 +42,7 @@ export const Contactus = () => {
   return (
     <div className="border flex flex-col justify-center items-center border-gray-100 space-y-4 w-full max-w-screen-sm bg-white p-6 m-3 lg:p-10 shadow-2xl rounded-lg border-t-8 border-r-8 border-t-[#1f8598] border-r-[#ed8972]">
       <h1 className="mb-6 text-3xl md:text-4xl font-semibold self-center">
-        Contact Us
+        {t("Contact Us")}
       </h1>
       <form
         className="flex flex-col items-center gap-12 w-full"
@@ -49,25 +51,25 @@ export const Contactus = () => {
         <input
           className="h-12 w-full rounded-md bg-gray-100 px-3"
           type="text"
-          placeholder="Name"
+          placeholder={t("Name")}
           {...register("user_name", { required: true })}
         />
         <input
           className="h-12 w-full rounded-md bg-gray-100 px-3"
           type="email"
-          placeholder="Email"
+          placeholder={t("Email")}
           {...register("user_email", { required: true })}
         />
         <input
           className="h-12 w-full rounded-md bg-gray-100 px-3"
           type="text"
-          placeholder="Phone"
+          placeholder={t("Phone")}
           {...register("user_phone", { required: true })}
         />
         <textarea
           rows={4}
           className="w-full rounded-md bg-gray-100 px-3 p-2"
-          placeholder="Message"
+          placeholder={t("Message")}
           {...register("message", { required: true })}
         />
         <input
@@ -75,7 +77,7 @@ export const Contactus = () => {
             isLoading ? "disabled:opacity-65 disabled:cursor-not-allowed" : ""
           }`}
           type="submit"
-          value={isLoading ? "Sending..." : "Send"}
+          value={isLoading ? t("Sending...") : t("Send")}
           disabled={isLoading}
         />
       </form>

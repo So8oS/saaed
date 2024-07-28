@@ -2,10 +2,11 @@
 
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Sidbar from "./sidbar";
 import Link from "next/link";
 import Language from "./language";
+import { useTranslations } from "next-intl";
 
 const routes = [
   {
@@ -19,30 +20,32 @@ const routes = [
 ];
 
 const Navbar = () => {
+  const t = useTranslations("Navbar");
+
   return (
     <div
-      className={`  flex items-center   py-3  px-5 xl:px-0  justify-between font-Lora   text-xl container mx-auto max-w-6xl border-b border-slate-300  `}
+      className={`flex items-center py-3 px-5 xl:px-0 justify-between font-Lora text-xl container mx-auto max-w-6xl border-b border-slate-300`}
     >
-      <div className="flex items-center  gap-2 ">
+      <div className="flex items-center gap-2">
         <img
-          src="./logo.png"
+          src="/logo.png" // Changed to absolute path
           alt="Logo"
-          className="w-9 cursor-pointer "
+          className="w-9 cursor-pointer"
           onClick={() => {
-            window.location.href = "./";
+            window.location.href = "/";
           }}
         />
         {/* <h1 className='text-[#1f8598] flex text-2xl'>Saa<h1 className='text-[#ed8972]'>ed</h1></h1> */}
       </div>
 
-      <ul className="md:flex justify-center items-center font-semibold gap-10 hidden ">
+      <ul className="md:flex justify-center items-center font-semibold gap-10 hidden">
         {routes.map((route, index) => (
           <Link
             href={`/${route.path}`}
             key={index}
-            className="cursor-pointer hover:text-[#1f8598] hover:border-b-2 border-[#1f8598] transition duration-300 "
+            className="cursor-pointer hover:text-[#1f8598] hover:border-b-2 border-[#1f8598] transition duration-300"
           >
-            {route.name}
+            {t(route.name)}
           </Link>
         ))}
         <Language />

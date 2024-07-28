@@ -1,31 +1,41 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
+import React, { useState, useTransition } from "react";
+import { usePathname } from "next/navigation";
 
 const Language = () => {
-  const [lang, setLang] = useState("en");
-  const { i18n } = useTranslation();
+  const pathname = usePathname();
+
+  const [pending, startTransition] = useTransition();
+  const router = useRouter();
+  const locale = useLocale();
+  const [lang, setLang] = useState(locale);
+
+  const changeLanguage = (nextLocale: React.SetStateAction<string>) => {
+    startTransition(() => {
+      setLang(nextLocale);
+      router.push(
+        `/${nextLocale}/${pathname.length > 4 ? pathname.split("/")[2] : ""}`
+      );
+    });
+  };
+
   return (
-    <div>
+    <div className="flex justify-center items-center">
       {lang === "en" ? (
         <img
-          src="./ar.png"
+          src="/ar.png"
           alt="Language"
           className="w-8 cursor-pointer"
-          onClick={() => {
-            setLang("ar");
-            i18n.changeLanguage("ar");
-          }}
+          onClick={() => changeLanguage("ar")}
         />
       ) : (
         <img
-          src="./en.png"
+          src="/en.png"
           alt="Language"
           className="w-8 cursor-pointer"
-          onClick={() => {
-            setLang("en");
-            i18n.changeLanguage("en");
-          }}
+          onClick={() => changeLanguage("en")}
         />
       )}
     </div>

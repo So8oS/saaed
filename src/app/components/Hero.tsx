@@ -5,17 +5,26 @@ import Link from "next/link";
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import WordFadeIn from "@/components/magicui/word-fade-in";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 const Hero = () => {
   const t = useTranslations("Hero");
+  const locale: string = useLocale();
 
   return (
     <div className="flex flex-col justify-center items-center text-center pb-16">
-      <WordFadeIn
-        words={t("Unlock Your Potential")}
-        delay={0.05}
-        className="mb-4"
-      />
+      {locale === "en" ? (
+        <WordFadeIn
+          words={t("Unlock Your Potential")}
+          delay={0.05}
+          className="mb-4 font-Dubai"
+        />
+      ) : (
+        <h1 className="font-bold md:text-7xl text-4xl mb-4" data-aos="fade-up">
+          {t("Unlock Your Potential")}
+        </h1>
+      )}
+
       <p
         className="text-base md:text-xl leading-relaxed md:px-14"
         data-aos="fade-up"

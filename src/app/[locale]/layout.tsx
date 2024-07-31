@@ -25,7 +25,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={`${locale === "ar" && "rtl"}`}>
       <head>
         <link rel="icon" href="/LogoIcon.ico" sizes="any" />
         <link href="https://fonts.cdnfonts.com/css/dubai" rel="stylesheet" />

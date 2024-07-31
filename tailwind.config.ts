@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        Dubai: ["Dubai"],
+      },
       slide: {
         to: {
           transform: "translate(calc(100cqw - 100%), 0)",

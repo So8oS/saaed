@@ -217,7 +217,7 @@ const AssessmentForm: React.FC = () => {
                       type="radio"
                       name={`question${index}`}
                       value={option}
-                      className="mr-2"
+                      className="mx-2"
                       checked={responses[index] === option}
                       onChange={() => handleChange(index, option)}
                     />

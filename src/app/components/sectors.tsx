@@ -69,7 +69,7 @@ const Sectors = () => {
           <div
             data-aos="fade-left"
             key={index}
-            className="p-6 max-w-sm bg-white rounded-xl shadow-md flex items-center space-x-4 
+            className="p-6 max-w-sm bg-white rounded-xl shadow-md flex items-center gap-6
                transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 overflow-x-hidden"
           >
             <div className="flex-shrink-0 ">{sector.icon}</div>

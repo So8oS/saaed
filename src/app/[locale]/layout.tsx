@@ -60,7 +60,6 @@ export default async function RootLayout({
           />
         </NextIntlClientProvider>
       </body>
-      <script>AOS.init();</script>
     </html>
   );
 }

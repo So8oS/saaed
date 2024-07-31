@@ -19,12 +19,12 @@ const routes = [
   {
     name: "Home",
     icon: <IoHome className="w-8 h-8" />,
-    path: "/",
+    path: "",
   },
   {
     name: "Contact Us",
     icon: <BsInfoCircleFill className="w-8 h-8" />,
-    path: "/contact",
+    path: "contact",
   },
 ];
 
@@ -49,7 +49,7 @@ const Sidbar = () => {
           <div className="flex flex-col text-2xl gap-8 border-y border-slate-900 py-5">
             {routes.map((route, index) => (
               <Link
-                href={`${route.path}`}
+                href={`/${route.path}`}
                 key={index}
                 className="flex items-center gap-5 p-2 rounded-md"
                 onClick={closeSheet}

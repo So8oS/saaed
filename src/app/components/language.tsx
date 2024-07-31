@@ -1,29 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import React, { useState, useTransition } from "react";
+import React, { useTransition } from "react";
 import { usePathname } from "next/navigation";
 
-const Language = () => {
+const LanguageSwitcher = () => {
+  const [isPending, startTransition] = useTransition();
+  // const router = useRouter();
+  const localActive = useLocale();
   const pathname = usePathname();
 
-  const [pending, startTransition] = useTransition();
-  const router = useRouter();
-  const locale = useLocale();
-  const [lang, setLang] = useState(locale);
-
-  const changeLanguage = (nextLocale: React.SetStateAction<string>) => {
+  const changeLanguage = (nextLocale: String) => {
     startTransition(() => {
-      setLang(nextLocale);
-      router.push(
-        `/${nextLocale}/${pathname.length > 4 ? pathname.split("/")[2] : ""}`
-      );
+      // Remove the current locale from the pathname
+      const cleanedPathname = pathname.replace(/^\/(en|ar)/, "");
+      const newPath = `/${nextLocale}${cleanedPathname}`;
+      // Optionally, you can use router.push instead of window.location.href
+      // router.push(newPath);
+      window.location.href = newPath;
     });
   };
 
   return (
     <div className="flex justify-center items-center">
-      {lang === "en" ? (
+      {localActive === "en" ? (
         <img
           src="/ar.png"
           alt="Language"
@@ -42,4 +42,4 @@ const Language = () => {
   );
 };
 
-export default Language;
+export default LanguageSwitcher;

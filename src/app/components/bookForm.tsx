@@ -291,7 +291,7 @@ const coachingTypes = [
 
 const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [activeTab, setActiveTab] = useState("bussiness");
+  const [activeTab, setActiveTab] = useState("business");
   const [selectedIndustry, setSelectedIndustry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
 
@@ -361,24 +361,25 @@ const Form = () => {
       <h1 className="mb-6 text-xl font-semibold lg:text-2xl self-center">
         {t("Booking Form")}
       </h1>
-      <div className="shadow rounded-full h-10 mt-4 flex relative items-center w-72 self-center font-medium">
-        <div className="w-full flex justify-center">
-          <button onClick={() => setActiveTab("individual")}>
-            {t("Individual")}
-          </button>
-        </div>
-        <div className="w-full flex justify-center">
-          <button onClick={() => setActiveTab("business")}>
-            {t("Business")}
-          </button>
-        </div>
-        <span
-          className={`elSwitch bg-[#1f8598] shadow text-white flex items-center justify-center w-1/2 rounded-full h-8 transition-all top-[4px] absolute ${
-            activeTab === "individual" ? "left-1" : "left-[calc(50%+-5px)]"
+      <div className="shadow  h-10 mt-4 flex relative items-center w-72 self-center font-medium rounded-md overflow-hidden">
+        <button
+          className={`w-1/2 flex justify-center py-2  ${
+            activeTab === "individual"
+              ? "bg-[#1f8598] text-white"
+              : "bg-gray-200"
           }`}
+          onClick={() => setActiveTab("individual")}
         >
-          {activeTab === "individual" ? t("Individual") : t("Business")}
-        </span>
+          {t("Individual")}
+        </button>
+        <button
+          className={`w-1/2 flex justify-center py-2  ${
+            activeTab === "business" ? "bg-[#1f8598] text-white" : "bg-gray-200"
+          }`}
+          onClick={() => setActiveTab("business")}
+        >
+          {t("Business")}
+        </button>
       </div>
       {/* @ts-ignore */}
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-xl m-auto">

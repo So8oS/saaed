@@ -14,7 +14,7 @@ const Footer = () => {
     <footer className="border-y border-slate-300 p-10">
       <div className="container mx-auto max-w-6xl flex flex-col lg:flex-row lg:justify-between items-center lg:items-start gap-5">
         <div className="flex items-center gap-9 flex-col lg:flex-row">
-          <img className="w-24" src="logo.png" alt="" />
+          <img className="w-24" src="/logo.png" alt="" />
           <p className="max-w-md text-lg text-center lg:text-start">
             {t(
               "SAAED is a coaching and consulting firm based in Saudi Arabia, dedicated to empowering organizations and individuals through expert guidance and support Our team of certified coaches, recognized by the International Coaching Federation (ICF), offers a comprehensive suite of services tailored to meet diverse needs of businesses and governmental agencies"

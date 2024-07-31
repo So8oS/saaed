@@ -170,7 +170,6 @@ const AssessmentForm: React.FC = () => {
   );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [result, setResult] = useState("");
-  const [lang, setLang] = useState(locale);
 
   const handleChange = (questionIndex: number, value: string): void => {
     const newResponses = [...responses];
@@ -182,14 +181,14 @@ const AssessmentForm: React.FC = () => {
     e.preventDefault();
     if (responses.includes(null)) {
       alert(
-        lang === "en"
+        locale === "en"
           ? "Please answer all questions before submitting."
           : "يرجى الإجابة على جميع الأسئلة قبل الإرسال."
       );
       return;
     }
     const answerCodes = responses.map((response) => response!.split(")")[0]);
-    setResult(resultPrompt(answerCodes, lang));
+    setResult(resultPrompt(answerCodes, locale));
     setIsDialogOpen(true);
   };
 
@@ -197,13 +196,13 @@ const AssessmentForm: React.FC = () => {
     <div className="flex flex-col justify-center items-center">
       <div className="relative border border-gray-100 space-y-4 max-w-screen-lg mb-10 bg-white py-6 px-5 lg:p-10 shadow-2xl rounded-lg border-t-8 border-r-8 border-t-[#1f8598] border-r-[#ed8972]">
         <h1 className="mb-6 text-2xl font-semibold lg:text-2xl self-center">
-          {lang === "en" ? "Assessment Form" : "نموذج التقييم"}
+          {locale === "en" ? "Assessment Form" : "نموذج التقييم"}
         </h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col">
           {/* @ts-ignore */}
 
-          {questions[lang].map((question, index) => (
+          {questions[locale].map((question, index) => (
             <div key={index} className="mb-8">
               <p className="mb-2 font-semibold md:text-2xl">{`${
                 index + 1
@@ -211,7 +210,7 @@ const AssessmentForm: React.FC = () => {
               <div className="flex flex-col gap-4">
                 {/* @ts-ignore */}
 
-                {options[lang][index].map((option, optionIndex) => (
+                {options[locale][index].map((option, optionIndex) => (
                   <label key={optionIndex} className="md:text-lg text-sm flex">
                     <input
                       type="radio"
@@ -231,7 +230,7 @@ const AssessmentForm: React.FC = () => {
             type="submit"
             className="mt-5 w-full rounded-md bg-[#1f8598] p-2 text-center font-semibold text-white cursor-pointer "
           >
-            {lang === "en" ? "Submit" : "إرسال"}
+            {locale === "en" ? "Submit" : "إرسال"}
           </button>
         </form>
       </div>
@@ -239,12 +238,12 @@ const AssessmentForm: React.FC = () => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="flex flex-col justify-center items-center gap-5 text-center py-32">
           <h1 className="text-4xl font-semibold">
-            {lang === "en" ? "Assessment Result" : "نتيجة التقييم"}
+            {locale === "en" ? "Assessment Result" : "نتيجة التقييم"}
           </h1>
           <p className="text-xl" dangerouslySetInnerHTML={{ __html: result }} />
           <Link href="/book" className="z-10">
             <button className="mt-5 w-full rounded-md text-lg bg-[#1f8598] px-4 py-2 text-center font-semibold text-white cursor-pointer">
-              {lang === "en" ? "Book Now" : "احجز الآن"}
+              {locale === "en" ? "Book Now" : "احجز الآن"}
             </button>
           </Link>
         </DialogContent>

@@ -77,7 +77,7 @@ const Sectors = () => {
               <div className="text-xl font-medium text-black">
                 {t(sector.titleKey)}
               </div>
-              <p className="text-gray-500">{t(sector.descriptionKey)}</p>
+              {/* <p className="text-gray-500">{t(sector.descriptionKey)}</p> */}
             </div>
           </div>
         ))}

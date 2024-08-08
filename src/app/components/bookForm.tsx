@@ -358,9 +358,9 @@ const Form = () => {
 
   return (
     <div className="overflow-scroll border flex flex-col justify-center items-center border-gray-100 space-y-4 max-w-screen-xl bg-white p-6 m-3 lg:p-10 shadow-2xl rounded-lg border-t-8 border-r-8 border-t-[#1f8598] border-r-[#ed8972]">
-      <h1 className="mb-6 text-xl font-semibold lg:text-2xl self-center">
+      {/* <h1 className="mb-6 text-xl font-semibold lg:text-2xl self-center">
         {t("Booking Form")}
-      </h1>
+      </h1> */}
       <div className="shadow  h-10 mt-4 flex relative items-center w-72 self-center font-medium rounded-md overflow-hidden">
         <button
           className={`w-1/2 flex justify-center py-2  ${

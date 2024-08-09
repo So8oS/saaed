@@ -5,7 +5,7 @@ import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
 import { useTranslations } from "next-intl";
 interface FormValues {
-  country: any;
+  country: string;
   clientType: string;
   name: string;
   email: string;
@@ -19,6 +19,7 @@ interface FormValues {
   subIndustry: string;
   otherIndustry: string;
   city: string;
+  otherCity: string;
   website: string;
   phone: string;
   question1: string;
@@ -277,6 +278,7 @@ const cities = [
   { value: "rafha", name: "Rafha" },
   { value: "hail", name: "Hail" },
   { value: "other", name: "Other" },
+  { value: "gcc", name: "GCC Countries" },
 ];
 
 const gccCountries = ["UAE", "Qatar", "Oman", "Bahrain", "Kuwait"];
@@ -303,14 +305,47 @@ const Form = () => {
   } = useForm();
 
   const onSubmit = (data: FormValues) => {
-    setIsSubmitting(true);
-    console.log(data);
+    // setIsSubmitting(true);
+    // console.log(data);
+    const formData = {
+      name: data.name,
+      email: data.email,
+      telephone: data.telephone,
+      coachingType: data.coachingType,
+      preferredDate: data.preferredDate,
+      message: data.message,
+      companyName: data.companyName,
+      responsibleName: data.responsibleName,
+      industry: data.industry,
+      city: data.city,
+      country: selectedCity === "gcc" ? data.country : undefined, // Only include country if GCC is selected
+      otherCity: selectedCity === "other" ? data.otherCity : undefined, // Only include other city if Other City is selected
+      website: data.website,
+      phone: data.phone,
+      question1: data.question1,
+      question2: data.question2,
+      question3: data.question3,
+    };
 
-    const individual = `CLIENT BOOKING\nClient Type:${activeTab}\nName: ${data.name}\nEmail: ${data.email}\nTelephone: ${data.telephone}\nCoaching Type: ${data.coachingType}\nPreferred Date: ${data.preferredDate}\nMessage: ${data.message}`;
+    // Construct the message content based on the active tab
+    const individual = `CLIENT BOOKING\nClient Type: ${activeTab}\nName: ${data.name}\nEmail: ${data.email}\nTelephone: ${data.telephone}\nCoaching Type: ${data.coachingType}\nPreferred Date: ${data.preferredDate}\nMessage: ${data.message}`;
 
-    const business = `CLIENT BOOKING\nClient Type:${activeTab}\nCompany Name: ${data.companyName}\nResponsible Name: ${data.responsibleName}\nIndustry: ${data.industry}\nCity: ${data.city}\nWebsite: ${data.website}\nPhone: ${data.phone}\nQuestions:\n1- ${data.question1}\n2- ${data.question2}\n3- ${data.question3}`;
+    const business = `CLIENT BOOKING\nClient Type: ${activeTab}\nCompany Name: ${
+      formData.companyName
+    }\nResponsible Name: ${formData.responsibleName}\nIndustry: ${
+      formData.industry
+    }\nCity: ${formData.city}\n${
+      formData.country
+        ? `Country: ${formData.country}\n`
+        : formData.otherCity
+        ? `Other: ${formData.otherCity}\n`
+        : ""
+    }Website: ${formData.website}\nPhone: ${formData.phone}\nQuestions:\n1- ${
+      formData.question1
+    }\n2- ${formData.question2}\n3- ${formData.question3}`;
 
     const messageContent = activeTab === "individual" ? individual : business;
+
     console.log(messageContent);
 
     const templateParams = {
@@ -550,8 +585,8 @@ const Form = () => {
                   <option value="" disabled selected>
                     {t("Select Industry")}
                   </option>
-                  {industries.map((industry) => (
-                    <option key={industry.value} value={industry.value}>
+                  {industries.map((industry, index) => (
+                    <option key={index} value={industry.name}>
                       {t(industry.name)}
                     </option>
                   ))}
@@ -601,7 +636,7 @@ const Form = () => {
               )}
             </div>
             <div className="pt-4">
-              <label>{t("Select City")}</label>
+              <label>{t("City:")}</label>
               <select
                 {...register("city", { required: t("This field is required") })}
                 className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3 cursor-pointer"
@@ -622,7 +657,7 @@ const Form = () => {
                 </p>
               )}
             </div>
-            {selectedCity === "other" && (
+            {selectedCity === "gcc" && (
               // select from gcc countries
               <div className="pt-4">
                 <label>{t("Country:")}</label>
@@ -639,6 +674,22 @@ const Form = () => {
                     </option>
                   ))}
                 </select>
+                {errors.country && (
+                  <p className="text-red-500 text-sm">
+                    {errors.country.message?.toString()}
+                  </p>
+                )}
+              </div>
+            )}
+            {selectedCity === "other" && (
+              <div className="pt-4">
+                <label>{t("other:")}</label>
+                <input
+                  type="text"
+                  placeholder={t("Other City")}
+                  {...register("otherCity", { required: "City is required" })}
+                  className="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+                />
                 {errors.country && (
                   <p className="text-red-500 text-sm">
                     {errors.country.message?.toString()}
